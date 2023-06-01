@@ -13,6 +13,9 @@ todo:
 + implement both interactive and non interactive options (if applicable)
 + implement a cli to run commands
 + implement a web ui to view results and run tests (flask)
++ write a CI pipeline to generate documentation (listing the benchmarks)
++ implement bundles of benchmarks (compilation should run several microbenchmarks such as llvm, kernel..)
+
 
 sample output 
 
@@ -34,3 +37,15 @@ logging.basicConfig(level=logging.INFO)
 tb = tinyben(benchmarks=["llvm"])
 tb.run()
 ```
+
+
+## benchmarks supported at the moment
+
++ compilation https://openbenchmarking.org/suite/pts/compilation
++ Timed Erlang/OTP Compilation
++ Timed FFmpeg Compilation
++ Timed GCC Compilation
++ Timed GDB GNU Debugger Compilation
++ Timed Godot Game Engine Compilation
++ Timed ImageMagick Compilation
++ Timed Linux Kernel Compilation
