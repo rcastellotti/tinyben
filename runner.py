@@ -1,6 +1,6 @@
-from tinyben import Bot
+from tinyben import tinyben
 import logging
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(benchmarks=["llvm"])
+bot = tinyben(benchmarks=["llvm"])
 bot.run()
