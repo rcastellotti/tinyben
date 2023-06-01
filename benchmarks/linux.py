@@ -33,11 +33,11 @@ class tb_benchmark(tb_benchmark_base):
     def run(self):
         self.pre()
         start_time = time.time()
-        p = subprocess.call(["make", "-j 4"], cwd=self.filename)
+        p = subprocess.call(["make", "-j" ,"4"], cwd=self.filename)
         running_time = time.time() - start_time
         logging.info(f"--- {running_time} seconds ---")
         print("running linux kernel")
-        self.post()
+        # self.post()
 
     def post(self):
         os.rmdir(self.filename)
