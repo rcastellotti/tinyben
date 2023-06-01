@@ -15,9 +15,12 @@ todo:
 + implement a web ui to view results and run tests (flask)
 + write a CI pipeline to generate documentation (listing the benchmarks)
 + implement bundles of benchmarks (compilation should run several microbenchmarks such as llvm, kernel..)
++ implement benchmark fields (name, short name, description, required packages)
++ implement cleanup functions (use tmpdirectory)
++ implement status (recode subprocess.call)
++ implement option to see commands run (yellow)
 
-
-sample output 
+sample output (to implement)
 
 ```
 benchmark                status  result

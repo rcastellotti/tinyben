@@ -17,3 +17,7 @@ class tinyben:
     def run(self):
         for benchmark in self.benchmarks:
             benchmark.run()
+
+
+
+# implement pre, post (if needed)
