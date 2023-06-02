@@ -16,8 +16,7 @@ todo:
 
 ## how to use
 
-https://github.com/stevemar/code-reference-in-readme/blob/031e04f922c14ecd5b03a79d8c979ba8f3ab1e39/src/main.py#L1-L6
-
+https://github.com/rcastellotti/tinyben/blob/47e027689f03aef53487a8d0f87634323361d9f2/runner.py#L1
 
 ## benchmarks supported at the moment
 
