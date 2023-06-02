@@ -1,13 +1,18 @@
-from base import TBBenchmark_base
+"""
+TBBenchmark Godot game engine compilation benchmark
+"""
+
 import urllib.request
 import logging
 import tarfile
 import os
 import subprocess
+import shutil
 import time
 from tinyben import TinyBen
 from tinyben import TinyBenResult
-import shutil
+from base import TBBenchmarkBase
+
 
 # option to choose how many cores?
 
@@ -15,7 +20,9 @@ import shutil
 # https://github.com/godotengine/godot/releases/download/4.0.3-stable/Godot_v4.0.3-stable_linux.x86_64.zip
 # https://docs.godotengine.org/en/stable/contributing/development/compiling/compiling_for_linuxbsd.html
 # https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz
-class TBBenchmark(TBBenchmark_base):
+class TBBenchmark(TBBenchmarkBase):
+    """TBBenchmark Godot game engine compilation"""
+
     filename = "4.0.3-stable"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -60,24 +67,23 @@ class TBBenchmark(TBBenchmark_base):
         )
 
         if not os.path.exists(self.filename_tar_gz):
-            logging.info(f"starting download: {url}")
+            logging.info("starting download: %s", url)
             urllib.request.urlretrieve(url, self.filename_tar_gz)
-            logging.info(f"completed download: {url}")
+            logging.info("completed download: %s", url)
 
-        tar = tarfile.open(self.filename_tar_gz)
-        tar.extractall(path="imagemagick")
+        with tarfile.open(self.filename_tar_gz) as tar:
+            tar.extractall(path="imagemagick")
         self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
 
     def run_benchmark(self):
-        logging.debug(f"pre phase return code: {self.pre_return_code}")
+        logging.debug("pre phase return code: %s", self.pre_return_code)
         if self.pre_return_code == 0:
             start_time = time.time()
             ret = subprocess.call(["scons", "platform=linuxbsd"], cwd=self.cwd)
             running_time = time.time() - start_time
-            logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
-                self.result.set_testResult(running_time)
-                self.result.set_testStatus(":white_check_mark:")
+                self.result.set_test_result(running_time)
+                self.result.set_test_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

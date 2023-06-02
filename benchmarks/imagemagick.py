@@ -1,13 +1,17 @@
-from base import TBBenchmark_base
+"""
+TBBenchmark imagemagick compilation benchmark
+"""
+
 import urllib.request
 import logging
 import tarfile
 import os
 import subprocess
 import time
-from tinyben import TinyBen
-from tinyben import TinyBenResult
 import shutil
+from base import TBBenchmarkBase
+from tinyben import TinyBen, TinyBenResult
+
 
 # option to choose how many cores?
 
@@ -15,7 +19,9 @@ import shutil
 # https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-11.tar.gz
 
 
-class TBBenchmark(TBBenchmark_base):
+class TBBenchmark(TBBenchmarkBase):
+    """TBBenchmark imagemagick compilation"""
+
     filename = "7.1.1-11"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -34,26 +40,25 @@ class TBBenchmark(TBBenchmark_base):
         )
 
         if not os.path.exists(self.filename_tar_gz):
-            logging.info(f"starting download: {url}")
+            logging.info("starting download: %s",url)
             urllib.request.urlretrieve(url, self.filename_tar_gz)
-            logging.info(f"completed download: {url}")
+            logging.info("completed download: %s",url)
 
-        tar = tarfile.open(self.filename_tar_gz)
-        tar.extractall(path="imagemagick")
+        with tarfile.open(self.filename_tar_gz) as tar:
+            tar.extractall(path="imagemagick")
         self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
         print(self.cwd)
         self.pre_return_code = subprocess.call(["./configure"], cwd=self.cwd)
 
     def run_benchmark(self):
-        logging.debug(f"pre phase return code: {self.pre_return_code}")
+        logging.debug("pre phase return code: %s",self.pre_return_code)
         if self.pre_return_code == 0:
             start_time = time.time()
             ret = subprocess.call(["make", "-j", "4"], cwd=self.cwd)
             running_time = time.time() - start_time
-            logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
-                self.result.set_testResult(running_time)
-                self.result.set_testStatus(":white_check_mark:")
+                self.result.set_test_result(running_time)
+                self.result.set_test_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

@@ -1,13 +1,18 @@
-from base import TBBenchmark_base
+"""
+TBBenchmark ffmpeg compilation benchmark
+"""
+
 import urllib.request
 import logging
 import tarfile
 import os
 import subprocess
 import time
+import shutil
 from tinyben import TinyBen
 from tinyben import TinyBenResult
-import shutil
+from base import TBBenchmarkBase
+
 
 # option to choose how many cores?
 
@@ -15,7 +20,9 @@ import shutil
 # https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-11.tar.gz
 
 
-class TBBenchmark(TBBenchmark_base):
+class TBBenchmark(TBBenchmarkBase):
+    """TBBenchmark ffmpeg compilation"""
+
     filename = "7.1.1-11"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -38,8 +45,8 @@ class TBBenchmark(TBBenchmark_base):
             urllib.request.urlretrieve(url, self.filename_tar_gz)
             logging.info("completed download: %s", url)
 
-        tar = tarfile.open(self.filename_tar_gz)
-        tar.extractall(path="imagemagick")
+        with tarfile.open(self.filename_tar_gz) as tar:
+            tar.extractall(path="imagemagick")
         self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
         print(self.cwd)
         self.pre_return_code = subprocess.call(["./configure"], cwd=self.cwd)
@@ -51,8 +58,8 @@ class TBBenchmark(TBBenchmark_base):
             ret = subprocess.call(["make", "-j", "4"], cwd=self.cwd)
             running_time = time.time() - start_time
             if ret == 0:
-                self.result.set_testResult(running_time)
-                self.result.set_testStatus(":white_check_mark:")
+                self.result.set_test_result(running_time)
+                self.result.set_test_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

@@ -1,19 +1,25 @@
-from base import TBBenchmark_base
+"""
+LLVM project compilation (ninja) benchmark
+"""
+
 import urllib.request
 import logging
 import tarfile
 import os
 import subprocess
 import time
+import shutil
+from base import TBBenchmarkBase
 from tinyben import TinyBen
 from tinyben import TinyBenResult
-import shutil
 
 # https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-16.0.4.tar.gz
 # https://llvm.org/docs/GettingStarted.html#getting-the-source-code-and-building-llvm
 
 
-class TBBenchmark(TBBenchmark_base):
+class TBBenchmark(TBBenchmarkBase):
+    """LLVM project compilation (ninja)"""
+
     filename = "llvmorg-16.0.4"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -32,12 +38,12 @@ class TBBenchmark(TBBenchmark_base):
         )
 
         if not os.path.exists(self.filename_tar_gz):
-            logging.info(f"starting download: {url}")
+            logging.info("starting download: %s",url)
             urllib.request.urlretrieve(url, self.filename_tar_gz)
-            logging.info(f"completed download: {url}")
+            logging.info("completed download: %s",url)
 
-        tar = tarfile.open(self.filename_tar_gz)
-        tar.extractall(path="llvm")
+        with tarfile.open(self.filename_tar_gz) as tar:
+            tar.extractall(path="llvm")
         self.cwd = "llvm/" + os.listdir("llvm")[0]
 
         self.pre_return_code = subprocess.call(
@@ -50,10 +56,9 @@ class TBBenchmark(TBBenchmark_base):
             start_time = time.time()
             ret = subprocess.call(["ninja"], cwd=self.cwd + "/build")
             running_time = time.time() - start_time
-            logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
-                self.result.set_testResult(running_time)
-                self.result.set_testStatus(":white_check_mark:")
+                self.result.set_test_result(running_time)
+                self.result.set_test_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

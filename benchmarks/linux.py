@@ -1,19 +1,26 @@
-from base import TBBenchmark_base
+"""
+TBBenchmark linux compilation (defconfig) benchmark
+"""
+
 import urllib.request
 import logging
 import tarfile
 import os
 import subprocess
+import shutil
 import time
 from tinyben import TinyBen
 from tinyben import TinyBenResult
-import shutil
+from base import TBBenchmarkBase
+
 
 # option to choose how many cores?
 # https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.5.tar.xz
 
 
-class TBBenchmark(TBBenchmark_base):
+class TBBenchmark(TBBenchmarkBase):
+    """TBBenchmark linux compilation (defconfig)"""
+
     filename = "linux-6.3.5"
     filename_tar_xz = filename + ".tar.xz"
     pre_return_code = 1
@@ -51,26 +58,25 @@ class TBBenchmark(TBBenchmark_base):
             return
 
         if not os.path.exists(self.filename_tar_xz):
-            logging.info(f"starting download: {url}")
+            logging.info("starting download: %s", url)
             urllib.request.urlretrieve(url, self.filename_tar_xz)
-            logging.info(f"completed download: {url}")
+            logging.info("completed download: %s", url)
 
-        tar = tarfile.open(self.filename_tar_xz)
-        tar.extractall(path="linux")
+        with tarfile.open(self.filename_tar_xz) as tar:
+            tar.extractall(path="linux")
         self.cwd = "linux/" + os.listdir("linux")[0]
 
         self.pre_return_code = subprocess.call(["make", "defconfig"], cwd=self.cwd)
 
     def run_benchmark(self):
-        logging.debug(f"pre phase return code: {self.pre_return_code}")
+        logging.debug("pre phase return code: %s", self.pre_return_code)
         if self.pre_return_code == 0:
             start_time = time.time()
             ret = subprocess.call(["make", "-j", "4"], cwd=self.cwd)
             running_time = time.time() - start_time
-            logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
-                self.result.set_testResult(running_time)
-                self.result.set_testStatus(":white_check_mark:")
+                self.result.set_test_result(running_time)
+                self.result.set_test_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

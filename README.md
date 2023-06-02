@@ -8,7 +8,7 @@ We are always supporting (at least) the latest Ubuntu LTS version.
 ```bash
 python3 -m venv venv
 pip3 install -r requirements.txt
-python3 runner.py 
+python3 run.py 
 ```
 If you need to run with root permission (`apt-get` is part of a benchmark) run instead `sudo venv/bin/python3 runner.py`
 
