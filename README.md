@@ -4,16 +4,12 @@ tinyben is an attempt to create a bencharking suite, similar to [phoronix-test-s
 
 We are always supporting (at least) the latest Ubuntu LTS version.
 
-
-todo:
-
-+ implement representation via matplotlib figures
-+ every benchmark should describe what it does, report properly what it does
-+ implement benchmark fields (name, short name, description, required packages)
-+ implement cleanup functions (use tmpdirectory)
-+ implement status (recode subprocess.call)
-
-
 ## how to use
+```bash
+python3 -m venv venv
+pip3 install -r requirements.txt
+python3 runner.py 
+```
+If you need to run with root permission (`apt-get` is part of a benchmark) run instead `sudo venv/bin/python3 runner.py`
 
 https://github.com/rcastellotti/tinyben/blob/c007b45a4533c53c3000737683d562f591fd8bcf/runner.py#L1-L11
