@@ -12,4 +12,4 @@ python3 run.py
 ```
 If you need to run with root permission (`apt-get` is part of a benchmark) run instead `sudo venv/bin/python3 runner.py`
 
-https://github.com/rcastellotti/tinyben/blob/c007b45a4533c53c3000737683d562f591fd8bcf/runner.py#L1-L11
+https://github.com/rcastellotti/tinyben/blob/2c74e54e34ad1a28808c242b9d1a87e2ff788533/run.py#L1-L11
