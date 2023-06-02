@@ -1,14 +1,28 @@
+import logging
+
+
 class tb_benchmark_base:
-    # here we can have an empty dictionary that stores results
     results = {}
     """base class for tb_benchmarks"""
 
     def pre(self):
-        pass
+        raise NotImplementedError
+
+    def run_benchmark(self):
+        raise NotImplementedError
 
     def run(self):
-        pass
+        logging.debug("start running pre <BENCHMARK NAME>")
+        self.pre()
+        logging.debug("completed pre <BENCHMARK NAME>")
+
+        logging.debug("start running benchmark <BENCHMARK NAME>")
+        self.run_benchmark()
+        logging.debug("completed benchmark <BENCHMARK NAME>")
+
+        logging.debug("start running post <BENCHMARK NAME>")
+        self.post()
+        logging.debug("completed post <BENCHMARK NAME>")
 
     def post(self):
-        # cleanup??
-        pass
+        raise NotImplementedError

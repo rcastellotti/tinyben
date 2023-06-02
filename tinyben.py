@@ -6,17 +6,22 @@ from rich import box
 
 
 class TinyBenResult:
-    testFullname = ""
-    testShortname = ""
-    testResult = ""
-    testStatus = ""
+    _testFullname = ""
+    _testShortname = ""
+    _testResult = ""
+    _testStatus = ""
 
     def __init__(self, test_fullname, test_shortname, test_result, test_status):
-        self.testFullname = test_fullname
-        self.testShortname = test_shortname
-        self.testResult = test_result
-        self.testStatus = test_status
+        self._testFullname = test_fullname
+        self._testShortname = test_shortname
+        self._testResult = test_result
+        self._testStatus = test_status
 
+    def set_testResult(self, value):
+        self._testResult = value
+
+    def set_testStatus(self, value):
+        self._testStatus = value
 
 class TinyBen:
     results = []
@@ -48,13 +53,9 @@ class TinyBen:
 
         for result in self.results:
             table.add_row(
-                str(result.testFullname),
-                str(result.testStatus),
-                str(result.testResult),
+                str(result._testFullname),
+                str(result._testStatus),
+                str(result._testResult),
             )
 
         console.print(table)
-
-
-
-# benchmarkresult should have a meaningful placeholder in the event something fails
