@@ -23,3 +23,7 @@ https://github.com/rcastellotti/tinyben/blob/2c74e54e34ad1a28808c242b9d1a87e2ff7
 + mbw
 + redis
 + sqlite
+
+## sample run
+![image](https://github.com/rcastellotti/tinyben/assets/43064224/ee953b86-1141-4623-ad2a-ad211f74707d)
+
