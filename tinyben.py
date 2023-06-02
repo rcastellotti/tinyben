@@ -86,9 +86,9 @@ class TinyBen:
 
         for result in self.results:
             table.add_row(
-                str(result.getbenchmarkFullname()),
-                str(result.getbenchmarkStatus()),
-                str(result.getbenchmarkResult()),
+                str(result.get_benchmark_fullname()),
+                str(result.get_benchmark_status()),
+                str(result.get_benchmark_result()),
             )
 
         console.print(table)
