@@ -1,5 +1,8 @@
 class tb_benchmark_base:
+    # here we can have an empty dictionary that stores results
+    results = {}
     """base class for tb_benchmarks"""
+
     def pre(self):
         pass
 
@@ -7,6 +10,5 @@ class tb_benchmark_base:
         pass
 
     def post(self):
-        #cleanup??
+        # cleanup??
         pass
-
