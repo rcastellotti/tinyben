@@ -64,7 +64,7 @@ class tb_benchmark(tb_benchmark_base):
         logging.debug(f"pre phase return code: {self.pre_return_code}")
         if self.pre_return_code == 0:
             start_time = time.time()
-            ret = subprocess.call(["make", "-j", "4"], cwd=self.filename)
+            ret = subprocess.call(["make", "-j", "4"], cwd=self.cwd)
             running_time = time.time() - start_time
             logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
