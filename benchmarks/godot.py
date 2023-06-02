@@ -23,6 +23,7 @@ from base import TBBenchmarkBase
 class TBBenchmark(TBBenchmarkBase):
     """TBBenchmark Godot game engine compilation"""
 
+    tardir = "godot"
     filename = "4.0.3-stable"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -72,8 +73,8 @@ class TBBenchmark(TBBenchmarkBase):
             logging.info("completed download: %s", url)
 
         with tarfile.open(self.filename_tar_gz) as tar:
-            tar.extractall(path="imagemagick")
-        self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
+            tar.extractall(path=self.tardir)
+        self.cwd = self.tardir + "/" + os.listdir(self.tardir)[0]
 
     def run_benchmark(self):
         logging.debug("pre phase return code: %s", self.pre_return_code)
@@ -88,5 +89,5 @@ class TBBenchmark(TBBenchmarkBase):
         TinyBen.results.append(self.result)
 
     def post(self):
-        shutil.rmtree(self.cwd)
+        shutil.rmtree(self.tardir)
         os.remove(self.filename_tar_gz)

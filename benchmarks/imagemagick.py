@@ -22,6 +22,7 @@ from tinyben import TinyBen, TinyBenResult
 class TBBenchmark(TBBenchmarkBase):
     """TBBenchmark imagemagick compilation"""
 
+    tardir = "imagemagick"
     filename = "7.1.1-11"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -45,8 +46,8 @@ class TBBenchmark(TBBenchmarkBase):
             logging.info("completed download: %s", url)
 
         with tarfile.open(self.filename_tar_gz) as tar:
-            tar.extractall(path="imagemagick")
-        self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
+            tar.extractall(path=self.tardir)
+        self.cwd = self.tardir + "/" + os.listdir(self.tardir)[0]
         print(self.cwd)
         self.pre_return_code = subprocess.call(["./configure"], cwd=self.cwd)
 
@@ -63,8 +64,5 @@ class TBBenchmark(TBBenchmarkBase):
         TinyBen.results.append(self.result)
 
     def post(self):
-        shutil.rmtree(self.cwd)
+        shutil.rmtree(self.tardir)
         os.remove(self.filename_tar_gz)
-
-
-# boh

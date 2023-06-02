@@ -43,8 +43,8 @@ class TBBenchmark(TBBenchmarkBase):
             logging.info("completed download: %s", url)
 
         with tarfile.open(self.filename_tar_gz) as tar:
-            tar.extractall(path="llvm")
-        self.cwd = "llvm/" + os.listdir("llvm")[0]
+            tar.extractall(path=self.filename)
+        self.cwd = self.filename + "/" + os.listdir(self.filename)[0]
 
         self.pre_return_code = subprocess.call(
             ["cmake", "-S llvm", "-DCMAKE_BUILD_TYPE=Release", "-B build", "-G Ninja"],
@@ -64,5 +64,5 @@ class TBBenchmark(TBBenchmarkBase):
 
     def post(self):
         if self.pre_return_code == 0:
-            shutil.rmtree(self.cwd)
+            shutil.rmtree(self.filename)
             os.remove(self.filename_tar_gz)

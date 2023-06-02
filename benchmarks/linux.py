@@ -63,8 +63,8 @@ class TBBenchmark(TBBenchmarkBase):
             logging.info("completed download: %s", url)
 
         with tarfile.open(self.filename_tar_xz) as tar:
-            tar.extractall(path="linux")
-        self.cwd = "linux/" + os.listdir("linux")[0]
+            tar.extractall(path=self.filename)
+        self.cwd = self.filename + "/" + os.listdir(self.filename)[0]
 
         self.pre_return_code = subprocess.call(["make", "defconfig"], cwd=self.cwd)
 
@@ -82,8 +82,5 @@ class TBBenchmark(TBBenchmarkBase):
 
     def post(self):
         if self.pre_return_code == 0:
-            shutil.rmtree(self.cwd)
+            shutil.rmtree(self.filename)
             os.remove(self.filename_tar_xz)
-
-
-# this of course requires root privileges
