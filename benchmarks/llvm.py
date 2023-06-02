@@ -25,10 +25,10 @@ class TBBenchmark(TBBenchmarkBase):
     pre_return_code = 1
     cwd = ""
     result = TinyBenResult(
-        test_fullname="llvm-project compilation (ninja)",
-        test_shortname="llvm",
-        test_status=":x:",
-        test_result=None,
+        benchmark_fullname="llvm-project compilation (ninja)",
+        benchmark_shortname="llvm",
+        benchmark_status=":x:",
+        benchmark_result=None,
     )
 
     def pre(self):
@@ -57,8 +57,8 @@ class TBBenchmark(TBBenchmarkBase):
             ret = subprocess.call(["ninja"], cwd=self.cwd + "/build")
             running_time = time.time() - start_time
             if ret == 0:
-                self.result.set_test_result(running_time)
-                self.result.set_test_status(":white_check_mark:")
+                self.result.set_benchmark_result(running_time)
+                self.result.set_benchmark_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

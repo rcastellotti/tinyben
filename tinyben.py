@@ -12,40 +12,46 @@ from base import TBBenchmarkBase
 class TinyBenResult:
     """this is the class that implements benchmark results"""
 
-    _test_fullname = ""
-    _test_shortname = ""
-    _test_result = ""
-    _test_status = ""
+    _benchmark_fullname = ""
+    _benchmark_shortname = ""
+    _benchmark_result = ""
+    _benchmark_status = ""
 
-    def __init__(self, test_fullname, test_shortname, test_result, test_status):
-        self._test_fullname = test_fullname
-        self._test_shortname = test_shortname
-        self._test_result = test_result
-        self._test_status = test_status
+    def __init__(
+        self,
+        benchmark_fullname,
+        benchmark_shortname,
+        benchmark_result,
+        benchmark_status,
+    ):
+        self._benchmark_fullname = benchmark_fullname
+        self._benchmark_shortname = benchmark_shortname
+        self._benchmark_result = benchmark_result
+        self._benchmark_status = benchmark_status
 
-    def set_test_result(self, value):
-        """set the test result"""
-        self._test_result = value
+    def set_benchmark_result(self, value):
+        """set the benchmark result"""
+        self._benchmark_result = value
 
-    def get_test_result(self):
+    def get_benchmark_result(self):
         """get the benchmark result"""
-        return self._test_result
+        return self._benchmark_result
 
-    def set_test_status(self, value):
+    def set_benchmark_status(self, value):
         """set benchmark status"""
-        self._test_status = value
+        self._benchmark_status = value
 
-    def get_test_status(self):
+    def get_benchmark_status(self):
         """get the benchmark status"""
-        return self._test_status
+        return self._benchmark_status
 
-    def get_test_fullname(self):
+    def get_benchmark_fullname(self):
         """get benchmark fullname"""
-        return self._test_fullname
+        return self._benchmark_fullname
 
 
 class TinyBen:
-    """the class containing all tests"""
+    """the class containing all benchmarks"""
 
     results = []
 
@@ -80,9 +86,9 @@ class TinyBen:
 
         for result in self.results:
             table.add_row(
-                str(result.getTestFullname()),
-                str(result.getTestStatus()),
-                str(result.getTestResult()),
+                str(result.getbenchmarkFullname()),
+                str(result.getbenchmarkStatus()),
+                str(result.getbenchmarkResult()),
             )
 
         console.print(table)

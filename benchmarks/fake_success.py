@@ -15,10 +15,10 @@ class TBBenchmark(TBBenchmarkBase):
 
     pre_return_code = 1
     result = TinyBenResult(
-        test_fullname="fake benchmark success",
-        test_shortname="fake_success",
-        test_status=":x:",
-        test_result=None,
+        benchmark_fullname="fake benchmark success",
+        benchmark_shortname="fake_success",
+        benchmark_status=":x:",
+        benchmark_result=None,
     )
 
     def pre(self):
@@ -38,8 +38,8 @@ class TBBenchmark(TBBenchmarkBase):
             running_time = time.time() - start_time
 
             if ret == 0:
-                self.result.set_test_result(running_time)
-                self.result.set_test_status(":white_check_mark:")
+                self.result.set_benchmark_result(running_time)
+                self.result.set_benchmark_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 

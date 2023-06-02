@@ -15,7 +15,7 @@ class TBBenchmarkBase:
         raise NotImplementedError
 
     def run_benchmark(self):
-        """method that actually runs the test"""
+        """method that actually runs the benchmark"""
         raise NotImplementedError
 
     def run(self):

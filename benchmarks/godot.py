@@ -28,10 +28,10 @@ class TBBenchmark(TBBenchmarkBase):
     pre_return_code = 1
     cwd = ""
     result = TinyBenResult(
-        test_fullname="Godot Game Enging compilation",
-        test_shortname="godot",
-        test_status=":x:",
-        test_result=None,
+        benchmark_fullname="Godot Game Enging compilation",
+        benchmark_shortname="godot",
+        benchmark_status=":x:",
+        benchmark_result=None,
     )
 
     def pre(self):
@@ -82,8 +82,8 @@ class TBBenchmark(TBBenchmarkBase):
             ret = subprocess.call(["scons", "platform=linuxbsd"], cwd=self.cwd)
             running_time = time.time() - start_time
             if ret == 0:
-                self.result.set_test_result(running_time)
-                self.result.set_test_status(":white_check_mark:")
+                self.result.set_benchmark_result(running_time)
+                self.result.set_benchmark_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)
 
