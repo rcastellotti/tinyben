@@ -31,12 +31,12 @@ class tb_benchmark(tb_benchmark_base):
             + self.filename_tar_gz
         )
 
-        if not os.path.exists(self.filename_tar_xz):
+        if not os.path.exists(self.filename_tar_gz):
             logging.info(f"starting download: {url}")
             urllib.request.urlretrieve(url, self.filename_tar_gz)
             logging.info(f"completed download: {url}")
 
-        tar = tarfile.open(self.filename_tar_xz)
+        tar = tarfile.open(self.filename_tar_gz)
         tar.extractall(path="llvm")
         self.cwd = "llvm/" + os.listdir("llvm")[0]
 

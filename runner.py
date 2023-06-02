@@ -6,6 +6,6 @@ logging.basicConfig(
     level=logging.DEBUG, format=FORMAT
 )
 
-tb = TinyBen(benchmarks=["fake_success", "fake_failure","linux","imagemagick","godot"])
+tb = TinyBen(benchmarks=["fake_success", "fake_failure","linux","imagemagick","godot","llvm"])
 tb.run()
 tb.print_results()

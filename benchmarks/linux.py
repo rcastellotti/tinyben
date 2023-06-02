@@ -26,8 +26,7 @@ class tb_benchmark(tb_benchmark_base):
     )
 
     def pre(self):
-        linux_tar_xz = "v6.x/" + self.filename_tar_xz
-        url = "https://cdn.kernel.org/pub/linux/kernel/" + linux_tar_xz
+        url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/" + self.filename_tar_xz
 
         self.pre_return_code=subprocess.call(
             [
@@ -65,7 +64,7 @@ class tb_benchmark(tb_benchmark_base):
         logging.debug(f"pre phase return code: {self.pre_return_code}")
         if self.pre_return_code == 0:
             start_time = time.time()
-            ret = subprocess.call(["make", "-j", "4"], cwd=self.cwd)
+            ret = subprocess.call(["make", "-j", "4"], cwd=self.filename)
             running_time = time.time() - start_time
             logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
