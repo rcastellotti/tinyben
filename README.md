@@ -16,4 +16,4 @@ todo:
 
 ## how to use
 
-https://github.com/rcastellotti/tinyben/blob/e01116433dfa17185e3281cb4260714564a210cf/runner.py#L1-L11
+https://github.com/rcastellotti/tinyben/blob/c007b45a4533c53c3000737683d562f591fd8bcf/runner.py#L1-L11
