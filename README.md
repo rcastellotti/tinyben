@@ -16,15 +16,7 @@ todo:
 
 ## how to use
 
-```python
-from tinyben import tinyben
-import logging
-
-logging.basicConfig(level=logging.INFO)
-tb = tinyben(benchmarks=["llvm"])
-tb.run()
-```
-
+https://github.com/rcastellotti/tinyben/blob/main/tinyben.py
 
 ## benchmarks supported at the moment
 
