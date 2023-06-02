@@ -38,9 +38,9 @@ class TBBenchmark(TBBenchmarkBase):
         )
 
         if not os.path.exists(self.filename_tar_gz):
-            logging.info("starting download: %s",url)
+            logging.info("starting download: %s", url)
             urllib.request.urlretrieve(url, self.filename_tar_gz)
-            logging.info("completed download: %s",url)
+            logging.info("completed download: %s", url)
 
         with tarfile.open(self.filename_tar_gz) as tar:
             tar.extractall(path="llvm")

@@ -40,9 +40,9 @@ class TBBenchmark(TBBenchmarkBase):
         )
 
         if not os.path.exists(self.filename_tar_gz):
-            logging.info("starting download: %s",url)
+            logging.info("starting download: %s", url)
             urllib.request.urlretrieve(url, self.filename_tar_gz)
-            logging.info("completed download: %s",url)
+            logging.info("completed download: %s", url)
 
         with tarfile.open(self.filename_tar_gz) as tar:
             tar.extractall(path="imagemagick")
@@ -51,7 +51,7 @@ class TBBenchmark(TBBenchmarkBase):
         self.pre_return_code = subprocess.call(["./configure"], cwd=self.cwd)
 
     def run_benchmark(self):
-        logging.debug("pre phase return code: %s",self.pre_return_code)
+        logging.debug("pre phase return code: %s", self.pre_return_code)
         if self.pre_return_code == 0:
             start_time = time.time()
             ret = subprocess.call(["make", "-j", "4"], cwd=self.cwd)

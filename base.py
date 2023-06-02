@@ -6,6 +6,7 @@ import logging
 
 class TBBenchmarkBase:
     """base TBBenchmark class benchmarks extends"""
+
     results = {}
     """base class for TBBenchmarks"""
 

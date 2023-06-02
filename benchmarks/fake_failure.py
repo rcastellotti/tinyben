@@ -21,7 +21,6 @@ class TBBenchmark(TBBenchmarkBase):
     )
 
     def pre(self):
-
         try:
             self.pre_return_code = subprocess.call(
                 "does_not_exits", stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
@@ -30,7 +29,6 @@ class TBBenchmark(TBBenchmarkBase):
             pass
 
     def run_benchmark(self):
-
         if self.pre_return_code != 1:
             start_time = time.time()
             ret = subprocess.call("does_not_exist")
