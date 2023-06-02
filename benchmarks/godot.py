@@ -17,7 +17,7 @@ import shutil
 # https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz
 class tb_benchmark(tb_benchmark_base):
     filename = "4.0.3-stable"
-    filename_zip = filename + ".tar.gz"
+    filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
     cwd = ""
     result = TinyBenResult(
@@ -56,15 +56,15 @@ class tb_benchmark(tb_benchmark_base):
 
         url = (
             "https://github.com/godotengine/godot/archive/refs/tags/"
-            + self.filename_zip
+            + self.filename_tar_gz
         )
 
-        if not os.path.exists(self.filename_zip):
+        if not os.path.exists(self.filename_tar_gz):
             logging.info(f"starting download: {url}")
-            urllib.request.urlretrieve(url, self.filename_zip)
+            urllib.request.urlretrieve(url, self.filename_tar_gz)
             logging.info(f"completed download: {url}")
 
-        tar = tarfile.open(self.filename_zip)
+        tar = tarfile.open(self.filename_tar_gz)
         tar.extractall(path="imagemagick")
         self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
 
