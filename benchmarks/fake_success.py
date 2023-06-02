@@ -1,4 +1,4 @@
-from base import tb_benchmark_base
+from base import TBBenchmark_base
 import urllib.request
 import logging
 import tarfile
@@ -9,7 +9,7 @@ from tinyben import TinyBen
 from tinyben import TinyBenResult
 
 
-class tb_benchmark(tb_benchmark_base):
+class TBBenchmark(TBBenchmark_base):
     pre_return_code = 1
     result = TinyBenResult(
         test_fullname="fake benchmark success",
@@ -31,7 +31,9 @@ class tb_benchmark(tb_benchmark_base):
 
         if self.pre_return_code != 1:
             start_time = time.time()
-            ret = subprocess.call("ls",stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            ret = subprocess.call(
+                "ls", stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
+            )
             running_time = time.time() - start_time
 
             if ret == 0:
@@ -39,7 +41,6 @@ class tb_benchmark(tb_benchmark_base):
                 self.result.set_testStatus(":white_check_mark:")
 
         TinyBen.results.append(self.result)
-
 
     def post(self):
         pass

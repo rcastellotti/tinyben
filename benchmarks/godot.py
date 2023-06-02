@@ -1,4 +1,4 @@
-from base import tb_benchmark_base
+from base import TBBenchmark_base
 import urllib.request
 import logging
 import tarfile
@@ -15,7 +15,7 @@ import shutil
 # https://github.com/godotengine/godot/releases/download/4.0.3-stable/Godot_v4.0.3-stable_linux.x86_64.zip
 # https://docs.godotengine.org/en/stable/contributing/development/compiling/compiling_for_linuxbsd.html
 # https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz
-class tb_benchmark(tb_benchmark_base):
+class TBBenchmark(TBBenchmark_base):
     filename = "4.0.3-stable"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1

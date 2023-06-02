@@ -1,4 +1,4 @@
-from base import tb_benchmark_base
+from base import TBBenchmark_base
 import urllib.request
 import logging
 import tarfile
@@ -14,11 +14,12 @@ import shutil
 # https://imagemagick.org/script/install-source.php#linux
 # https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-11.tar.gz
 
-class tb_benchmark(tb_benchmark_base):
+
+class TBBenchmark(TBBenchmark_base):
     filename = "7.1.1-11"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
-    cwd=""
+    cwd = ""
     result = TinyBenResult(
         test_fullname="ImageMagick compilation (gcc)",
         test_shortname="imagemagick",
@@ -27,7 +28,10 @@ class tb_benchmark(tb_benchmark_base):
     )
 
     def pre(self):
-        url = "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/" + self.filename_tar_gz
+        url = (
+            "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/"
+            + self.filename_tar_gz
+        )
 
         if not os.path.exists(self.filename_tar_gz):
             logging.info(f"starting download: {url}")
@@ -36,7 +40,7 @@ class tb_benchmark(tb_benchmark_base):
 
         tar = tarfile.open(self.filename_tar_gz)
         tar.extractall(path="imagemagick")
-        self.cwd = "imagemagick/"+os.listdir("imagemagick")[0]
+        self.cwd = "imagemagick/" + os.listdir("imagemagick")[0]
         print(self.cwd)
         self.pre_return_code = subprocess.call(["./configure"], cwd=self.cwd)
 

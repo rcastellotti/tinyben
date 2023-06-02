@@ -1,4 +1,4 @@
-from base import tb_benchmark_base
+from base import TBBenchmark_base
 import urllib.request
 import logging
 import tarfile
@@ -13,11 +13,11 @@ import shutil
 # https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.5.tar.xz
 
 
-class tb_benchmark(tb_benchmark_base):
+class TBBenchmark(TBBenchmark_base):
     filename = "linux-6.3.5"
     filename_tar_xz = filename + ".tar.xz"
     pre_return_code = 1
-    cwd=""
+    cwd = ""
     result = TinyBenResult(
         test_fullname="linux compilation (defconfig)",
         test_shortname="linux",
@@ -28,7 +28,7 @@ class tb_benchmark(tb_benchmark_base):
     def pre(self):
         url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/" + self.filename_tar_xz
 
-        self.pre_return_code=subprocess.call(
+        self.pre_return_code = subprocess.call(
             [
                 "apt-get",
                 "install",
@@ -43,12 +43,13 @@ class tb_benchmark(tb_benchmark_base):
                 "libelf-dev",
                 "bison",
             ],
-            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
         )
-        if self.pre_return_code!=0:
+        if self.pre_return_code != 0:
             logging.error("apt-get requires root permission")
             return
-        
+
         if not os.path.exists(self.filename_tar_xz):
             logging.info(f"starting download: {url}")
             urllib.request.urlretrieve(url, self.filename_tar_xz)
@@ -56,7 +57,7 @@ class tb_benchmark(tb_benchmark_base):
 
         tar = tarfile.open(self.filename_tar_xz)
         tar.extractall(path="linux")
-        self.cwd = "linux/"+os.listdir("linux")[0]
+        self.cwd = "linux/" + os.listdir("linux")[0]
 
         self.pre_return_code = subprocess.call(["make", "defconfig"], cwd=self.cwd)
 

@@ -1,5 +1,5 @@
 import importlib
-from base import tb_benchmark_base
+from base import TBBenchmark_base
 from rich.console import Console
 from rich.table import Table
 from rich import box
@@ -23,6 +23,7 @@ class TinyBenResult:
     def set_testStatus(self, value):
         self._testStatus = value
 
+
 class TinyBen:
     results = []
 
@@ -32,9 +33,9 @@ class TinyBen:
             for plugin in benchmarks:
                 plugin_to_add = importlib.import_module(
                     f"benchmarks.{plugin}"
-                ).tb_benchmark()
+                ).TBBenchmark()
 
-                if isinstance(plugin_to_add, tb_benchmark_base):
+                if isinstance(plugin_to_add, TBBenchmark_base):
                     self.benchmarks.append(plugin_to_add)
 
     def run(self):

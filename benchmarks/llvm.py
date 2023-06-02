@@ -1,4 +1,4 @@
-from base import tb_benchmark_base
+from base import TBBenchmark_base
 import urllib.request
 import logging
 import tarfile
@@ -13,7 +13,7 @@ import shutil
 # https://llvm.org/docs/GettingStarted.html#getting-the-source-code-and-building-llvm
 
 
-class tb_benchmark(tb_benchmark_base):
+class TBBenchmark(TBBenchmark_base):
     filename = "llvmorg-16.0.4"
     filename_tar_gz = filename + ".tar.gz"
     pre_return_code = 1
@@ -48,7 +48,7 @@ class tb_benchmark(tb_benchmark_base):
     def run_benchmark(self):
         if self.pre_return_code == 0:
             start_time = time.time()
-            ret = subprocess.call(["ninja"], cwd=self.cwd+"/build")
+            ret = subprocess.call(["ninja"], cwd=self.cwd + "/build")
             running_time = time.time() - start_time
             logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
@@ -61,5 +61,3 @@ class tb_benchmark(tb_benchmark_base):
         if self.pre_return_code == 0:
             shutil.rmtree(self.cwd)
             os.remove(self.filename_tar_gz)
-
-

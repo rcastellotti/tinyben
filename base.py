@@ -1,9 +1,9 @@
 import logging
 
 
-class tb_benchmark_base:
+class TBBenchmark_base:
     results = {}
-    """base class for tb_benchmarks"""
+    """base class for TBBenchmarks"""
 
     def pre(self):
         raise NotImplementedError
