@@ -16,7 +16,7 @@ todo:
 
 ## how to use
 
-https://github.com/rcastellotti/tinyben/blob/main/tinyben.py
+https://github.com/rcastellotti/tinyben/blob/main/tinyben.py#L1
 
 ## benchmarks supported at the moment
 
