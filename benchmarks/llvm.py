@@ -48,7 +48,7 @@ class tb_benchmark(tb_benchmark_base):
     def run_benchmark(self):
         if self.pre_return_code == 0:
             start_time = time.time()
-            ret = subprocess.call(["ninja"], cwd=self.filename)
+            ret = subprocess.call(["ninja"], cwd=self.cwd)
             running_time = time.time() - start_time
             logging.info(f"--- {running_time} seconds ---")
             if ret == 0:
