@@ -15,8 +15,12 @@ If you need to run with root permission (`apt-get` is part of a benchmark) run i
 
 https://github.com/rcastellotti/tinyben/blob/2c74e54e34ad1a28808c242b9d1a87e2ff788533/run.py#L1-L11
 
-# benchmarks i need now (will be removed)
+## benchmarks i need now (will be removed)
 
 + __cpu__ ~> compilation (llvm,linux, imagemagick, godot), lz4
 + __memory__ ~> tinymembench, RAMspeed, mbw
 + __I/O__ ~> redis, sqlite
+
+
+## sample run
+![image](https://github.com/rcastellotti/tinyben/assets/43064224/ee953b86-1141-4623-ad2a-ad211f74707d)

@@ -18,7 +18,7 @@ from tinyben import TinyBen, TinyBenResult
 CWD = os.path.realpath(__file__)
 PARENT = os.path.dirname(os.path.dirname(CWD))
 
-# https://imagemagick.org/script/install-source.php#linux
+# https://www.sqlite.org/howtocompile.html
 # https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip
 
 
@@ -69,7 +69,7 @@ class TBBenchmark(TBBenchmarkBase):
                 'DT' TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 'F1' VARCHAR(4) NOT NULL,
                 'F2' VARCHAR(16) NOT NULL
-            );""",
+             );""",
         ]
         os.chmod(self.cwd + "/sqlite3", 0o755)
         self.pre_return_code = subprocess.call(command, cwd=self.cwd)
