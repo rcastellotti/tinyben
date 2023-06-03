@@ -56,7 +56,7 @@ class TBBenchmark(TBBenchmarkBase):
         logging.debug("pre phase return code: %s", self.pre_return_code)
         if self.pre_return_code == 0:
             Path("results").mkdir(parents=True, exist_ok=True)
-            filename = f"results/tinymembench-{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.txt"
+            filename = f"results/tinymembench-{datetime.now().strftime('%Y-%m-%d-%H:%M:%S')}.txt"
             with open(filename, "a", encoding="utf-8") as f:
                 ret = subprocess.call(["./tinymembench"], cwd=self.cwd, stdout=f)
             if ret == 0:

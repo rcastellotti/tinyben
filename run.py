@@ -13,7 +13,8 @@ tb = TinyBen(
         # "godot",
         # "llvm",
         # "tinymembench",
-        "sqlite",
+        # "sqlite",
+        "redis",
     ]
 )
 tb.run()
