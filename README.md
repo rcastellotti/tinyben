@@ -13,8 +13,7 @@ python3 run.py
 ```
 If you need to run with root permission (`apt-get` is part of a benchmark) run instead `sudo venv/bin/python3 runner.py`
 
-https://github.com/rcastellotti/tinyben/blob/2c74e54e34ad1a28808c242b9d1a87e2ff788533/run.py#L1-L11
-
+https://github.com/rcastellotti/tinyben/blob/40ee71051109a1fbc0cdbcb628b51074fffd5964/run.py#L1-L23
 ## benchmarks i need now (will be removed)
 
 + __cpu__ ~> compilation (llvm,linux, imagemagick, godot), lz4
