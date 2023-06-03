@@ -36,3 +36,36 @@ https://github.com/rcastellotti/tinyben/blob/40ee71051109a1fbc0cdbcb628b51074fff
   redis-benchmark                                     │        ✅        │ results/redis-2023-06-03-18:47:28.csv       
   raas/mbw 1024 MiB                                   │        ✅        │ results/mbw-2023-06-03-18:48:12.txt 
   ```
+
+## instructions to launch an Ubuntu 22.04 qemu vm
+```bash
+wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+sudo qemu-img convert jammy-server-cloudimg-amd64.img jammy.img
+sudo qemu-img resize jammy.img +20G
+sudo cloud-localds cloud-config-tinyben.iso cloud-config-tinyben.yml
+```
+
+`cloud-config-tinyben.yml`
+```
+password: tb
+hostname: tinyben
+chpasswd: { expire: False }
+ssh_pwauth: True
+final_message: "Cloud init is done!"
+```
+
+```bash
+stty intr ^] &&
+sudo qemu-system-x86_64 \
+ -enable-kvm \
+ -smp 32 \
+ -m 32G \
+ -drive file=jammy.img,if=none,id=disk0,format=raw \
+ -drive file=cloud-config-tinyben.iso,media=cdrom,index=0 \
+ -device virtio-scsi-pci,id=scsi0,disable-legacy=on,iommu_platform=true \
+ -device scsi-hd,drive=disk0 \
+ -nographic \
+ -net user,hostfwd=tcp::10022-:22 \
+ -net nic 
+
+```
