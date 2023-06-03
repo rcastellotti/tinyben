@@ -2,19 +2,21 @@ import logging
 from tinyben import TinyBen
 
 FORMAT = "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s  - %(message)s"
-logging.basicConfig(level=logging.DEBUG, format=FORMAT)
+logging.basicConfig(level=logging.ERROR, format=FORMAT)
 
 tb = TinyBen(
     benchmarks=[
         # "fake_success",
         # "fake_failure",
-        # "linux",
-        # "imagemagick",
-        # "godot",
-        # "llvm",
-        # "tinymembench",
-        # "sqlite",
+        "linux",
+        "imagemagick",
+        "godot",
+        "llvm",
+        "tinymembench",
+        "sqlite",
         "redis",
+        "lz4",
+        "mbw",
     ]
 )
 tb.run()

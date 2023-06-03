@@ -18,7 +18,7 @@ https://github.com/rcastellotti/tinyben/blob/2c74e54e34ad1a28808c242b9d1a87e2ff7
 ## benchmarks i need now (will be removed)
 
 + __cpu__ ~> compilation (llvm,linux, imagemagick, godot), lz4
-+ __memory__ ~> tinymembench, RAMspeed, mbw
++ __memory__ ~> tinymembench, mbw
 + __I/O__ ~> redis, sqlite
 
 
