@@ -40,7 +40,9 @@ class TBBenchmark(TBBenchmarkBase):
 
     def pre(self):
         ubuntu_url = "https://releases.ubuntu.com/jammy/" + self.filename_iso
-        if not os.path.exists(self.tardir + "/" + self.filename_iso):
+        # Path(self.tardir).mkdir(parents=True, exist_ok=True)
+
+        if not os.path.exists(self.tardir):
             logging.info("starting download: %s, might take a lot", ubuntu_url)
             urllib.request.urlretrieve(
                 ubuntu_url, self.tardir + "/" + self.filename_iso

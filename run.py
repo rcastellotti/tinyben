@@ -2,7 +2,7 @@ import logging
 from tinyben import TinyBen
 
 FORMAT = "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s  - %(message)s"
-logging.basicConfig(level=logging.ERROR, format=FORMAT)
+logging.basicConfig(level=logging.DEBUG, format=FORMAT)
 
 tb = TinyBen(
     benchmarks=[
