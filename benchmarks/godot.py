@@ -89,5 +89,6 @@ class TBBenchmark(TBBenchmarkBase):
         TinyBen.results.append(self.result)
 
     def post(self):
-        shutil.rmtree(self.tardir)
-        os.remove(self.filename_tar_gz)
+        if self.pre_return_code == 0:
+            shutil.rmtree(self.tardir)
+            os.remove(self.filename_tar_gz)
