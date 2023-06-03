@@ -33,7 +33,7 @@ class TBBenchmark(TBBenchmarkBase):
 
     def pre(self):
         self.pre_return_code = subprocess.call(
-            ["apt-get", "install", "-y", "cmake", "ninja"],
+            ["apt-get", "install", "-y", "cmake", "ninja-build"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.STDOUT,
         )
