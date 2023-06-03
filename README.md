@@ -30,8 +30,8 @@ https://github.com/rcastellotti/tinyben/blob/40ee71051109a1fbc0cdbcb628b51074fff
   Godot Game Enging compilation                       │        ✅        │ 399.275563955307 s                            
   llvm-project compilation (ninja)                    │        ✅        │ 742.0720775127411 s                           
   sqlite 2500 insertions                              │        ✅        │ 2.628910541534424 s                           
-  lz4 compress ubuntu-22.04.2-desktop-amd64.iso       │        ✅        │ 0.4618799686431885 s                          
-  lz4 decompress ubuntu-22.04.2-desktop-amd64.iso.lz4 │        ✅        │ 0.34749507904052734 s   
+  lz4 compress ubuntu-22.04.2-desktop-amd64.iso       │        ✅        │ 7.096761703491211 s                          
+  lz4 decompress ubuntu-22.04.2-desktop-amd64.iso.lz4 │        ✅        │ 4.68076229095459 s   
   ssvb/tinymembench                                   │        ✅        │ results/tinymembench-2023-06-03-18:40:16.txt  
   redis-benchmark                                     │        ✅        │ results/redis-2023-06-03-18:47:28.csv       
   raas/mbw 1024 MiB                                   │        ✅        │ results/mbw-2023-06-03-18:48:12.txt 
