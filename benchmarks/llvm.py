@@ -32,6 +32,15 @@ class TBBenchmark(TBBenchmarkBase):
     )
 
     def pre(self):
+        self.pre_return_code = subprocess.call(
+            ["apt-get", "install", "-y", "cmake", "ninja"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
+        )
+        if self.pre_return_code != 0:
+            logging.error("apt-get requires root permission")
+            return
+
         url = (
             "https://github.com/llvm/llvm-project/archive/refs/tags/"
             + self.filename_tar_gz
