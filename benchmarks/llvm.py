@@ -57,7 +57,7 @@ class TBBenchmark(TBBenchmarkBase):
             ret = subprocess.call(["ninja"], cwd=self.cwd + "/build")
             running_time = time.time() - start_time
             if ret == 0:
-                self.result.set_benchmark_result(running_time)
+                self.result.set_benchmark_result(f"{running_time} s")
                 self.result.set_benchmark_status(":white_check_mark:")
 
         TinyBen.results.append(self.result)

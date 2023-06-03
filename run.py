@@ -12,7 +12,8 @@ tb = TinyBen(
         # "imagemagick",
         # "godot",
         # "llvm",
-        "tinymembench",
+        # "tinymembench",
+        "sqlite",
     ]
 )
 tb.run()
