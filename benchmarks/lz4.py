@@ -9,6 +9,7 @@ import os
 import subprocess
 import time
 import shutil
+from pathlib import Path
 from base import TBBenchmarkBase
 from tinyben import TinyBen
 from tinyben import TinyBenResult
@@ -40,9 +41,9 @@ class TBBenchmark(TBBenchmarkBase):
 
     def pre(self):
         ubuntu_url = "https://releases.ubuntu.com/jammy/" + self.filename_iso
-        # Path(self.tardir).mkdir(parents=True, exist_ok=True)
+        Path(self.tardir).mkdir(parents=True, exist_ok=True)
 
-        if not os.path.exists(self.tardir):
+        if not os.path.exists(self.tardir + "/" + self.filename_iso):
             logging.info("starting download: %s, might take a lot", ubuntu_url)
             urllib.request.urlretrieve(
                 ubuntu_url, self.tardir + "/" + self.filename_iso
