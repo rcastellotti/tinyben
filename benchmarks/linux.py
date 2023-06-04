@@ -18,7 +18,7 @@ from base import TBBenchmarkBase
 # https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.5.tar.xz
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBLinuxBenchmark(TBBenchmarkBase):
     """TBBenchmark linux compilation (defconfig)"""
 
     filename = "linux-6.3.5"

@@ -10,7 +10,7 @@ from tinyben import TinyBenResult
 from base import TBBenchmarkBase
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBFakeSuccessBenchmark(TBBenchmarkBase):
     """TBBenchmark fake_success"""
 
     pre_return_code = 1

@@ -25,7 +25,7 @@ PARENT = os.path.dirname(os.path.dirname(CWD))
 # https://github.com/redis/redis/archive/7.0.11.tar.gz
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBRedisBenchmark(TBBenchmarkBase):
     """TBBenchmark redis-benchmark"""
 
     tardir = "redis"

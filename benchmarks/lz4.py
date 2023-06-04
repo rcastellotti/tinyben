@@ -17,7 +17,7 @@ from tinyben import TinyBenResult
 # https://github.com/lz4/lz4/archive/refs/tags/v1.9.4.tar.gz
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBLz4Benchmark(TBBenchmarkBase):
     """LZ4 compression and decompression algorithm benchmark"""
 
     tardir = "lz4"

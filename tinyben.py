@@ -2,7 +2,6 @@
 this module contains the TinyBen class that collect all benchmarks and runs them
 """
 
-import importlib
 from rich.console import Console
 from rich.table import Table
 from rich import box
@@ -54,19 +53,17 @@ class TinyBen:
     """the class containing all benchmarks"""
 
     results = []
+    benchmarks = []
 
-    def __init__(self, benchmarks=None):
-        if benchmarks is None:
-            benchmarks = []
+    def __init__(self):
         self.benchmarks = []
-        if benchmarks:
-            for plugin in benchmarks:
-                plugin_to_add = importlib.import_module(
-                    f"benchmarks.{plugin}"
-                ).TBBenchmark()
 
-                if isinstance(plugin_to_add, TBBenchmarkBase):
-                    self.benchmarks.append(plugin_to_add)
+    def add_benchmark(self, benchmark):
+        """add a benchmark to TinyBen"""
+        if isinstance(benchmark, TBBenchmarkBase):
+            self.benchmarks.append(benchmark)
+        else:
+            raise ValueError("Benchmark must implement TBBenchmarkBase interface")
 
     def run(self):
         """run all the benchmarks"""

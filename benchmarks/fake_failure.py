@@ -9,7 +9,7 @@ from tinyben import TinyBenResult
 from base import TBBenchmarkBase
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBFakeFailureBenchmark(TBBenchmarkBase):
     """TBBenchmark fake_failure compilation"""
 
     pre_return_code = 1
@@ -37,7 +37,6 @@ class TBBenchmark(TBBenchmarkBase):
             if ret != 1:
                 self.result.set_benchmark_status(":white_check_mark:")
                 self.result.set_benchmark_result(running_time)
-
         TinyBen.results.append(self.result)
 
     def post(self):

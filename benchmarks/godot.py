@@ -20,7 +20,7 @@ from base import TBBenchmarkBase
 # https://github.com/godotengine/godot/releases/download/4.0.3-stable/Godot_v4.0.3-stable_linux.x86_64.zip
 # https://docs.godotengine.org/en/stable/contributing/development/compiling/compiling_for_linuxbsd.html
 # https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz
-class TBBenchmark(TBBenchmarkBase):
+class TBGodotBenchmark(TBBenchmarkBase):
     """TBBenchmark Godot game engine compilation"""
 
     tardir = "godot"

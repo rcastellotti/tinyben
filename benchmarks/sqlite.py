@@ -22,7 +22,7 @@ PARENT = os.path.dirname(os.path.dirname(CWD))
 # https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBSqliteBenchmark(TBBenchmarkBase):
     """TBBenchmark sqlite insertion"""
 
     filename = "sqlite-amalgamation-3420000"

@@ -20,7 +20,7 @@ from tinyben import TinyBen, TinyBenResult
 # https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-11.tar.gz
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBTinymembenchBenchmark(TBBenchmarkBase):
     """TBBenchmark imagemagick compilation"""
 
     tardir = "tinymembench"

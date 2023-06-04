@@ -17,7 +17,7 @@ from tinyben import TinyBenResult
 #  https://github.com/raas/mbw/archive/refs/tags/v2.0.tar.gz
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBMbwBenchmark(TBBenchmarkBase):
     """LZ4 compression and decompression algorithm benchmark"""
 
     tardir = "mbw"

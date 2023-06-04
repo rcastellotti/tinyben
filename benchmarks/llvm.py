@@ -17,7 +17,7 @@ from tinyben import TinyBenResult
 # https://llvm.org/docs/GettingStarted.html#getting-the-source-code-and-building-llvm
 
 
-class TBBenchmark(TBBenchmarkBase):
+class TBLlvmBenchmark(TBBenchmarkBase):
     """LLVM project compilation (ninja)"""
 
     filename = "llvmorg-16.0.4"
