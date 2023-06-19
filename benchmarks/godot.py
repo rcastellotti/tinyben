@@ -29,7 +29,7 @@ class TBGodotBenchmark(TBBenchmarkBase):
     pre_return_code = 1
     cwd = ""
     result = TinyBenResult(
-        benchmark_fullname="Godot Game Enging compilation",
+        benchmark_fullname="Godot Game Engine compilation",
         benchmark_shortname="godot",
         benchmark_status=":x:",
         benchmark_result=None,
