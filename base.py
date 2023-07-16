@@ -8,7 +8,7 @@ import abc
 class TBBenchmarkBase(metaclass=abc.ABCMeta):
     """base TBBenchmark class benchmarks extends"""
 
-    results = {}
+    result=""
     """base class for TBBenchmarks"""
 
     @abc.abstractmethod
@@ -23,17 +23,17 @@ class TBBenchmarkBase(metaclass=abc.ABCMeta):
 
     def run(self):
         """method introduced to add logging and call `pre` and `post` methods"""
-        logging.debug("start running pre <BENCHMARK NAME>")
+        logging.debug(f"start pre {self.result._benchmark_fullname}")
         self.pre()
-        logging.debug("completed pre <BENCHMARK NAME>")
+        logging.debug(f"completed pre {self.result._benchmark_fullname}")
 
-        logging.debug("start running benchmark <BENCHMARK NAME>")
+        logging.debug(f"start running benchmark {self.result._benchmark_fullname}")
         self.run_benchmark()
-        logging.debug("completed benchmark <BENCHMARK NAME>")
+        logging.debug(f"completed running benchmark {self.result._benchmark_fullname}")
 
-        logging.debug("start running post <BENCHMARK NAME>")
+        logging.debug(f"start post {self.result._benchmark_fullname}")
         self.post()
-        logging.debug("completed post <BENCHMARK NAME>")
+        logging.debug(f"completed post {self.result._benchmark_fullname}")
 
     @abc.abstractmethod
     def post(self):
