@@ -8,7 +8,7 @@ import abc
 class TBBenchmarkBase(metaclass=abc.ABCMeta):
     """base TBBenchmark class benchmarks extends"""
 
-    result=""
+    result = ""
     """base class for TBBenchmarks"""
 
     @abc.abstractmethod
