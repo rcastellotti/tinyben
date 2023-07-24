@@ -69,7 +69,7 @@ if pre_return_code == 0:
     ret = subprocess.call(["scons", "platform=linuxbsd"], cwd=cwd)
     running_time = (time.time() - start_time) * 1000
     if ret == 0:
-        common.save_to_file("sqlite", [start_time, running_time])
+        common.save_to_file("godot", [start_time, running_time])
 
 if pre_return_code == 0:
     shutil.rmtree(tardir)

@@ -1,5 +1,5 @@
 import csv
-
+import os
 def save_to_file(filename, row_to_append):
     file = f"./results/{filename}.csv"
     file_exists = os.path.exists(file)
