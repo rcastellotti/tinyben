@@ -3,7 +3,6 @@ import shutil
 import tarfile
 import time
 from datetime import datetime
-
 import tinyben.common as common
 
 
@@ -21,8 +20,6 @@ def main():
         )
         with tarfile.open(os.path.join(cache, "linux.tar.xz")) as tar:
             tar.extractall(cwd)
-
-        print(os.path.join(cwd, os.listdir(cwd)[0]))
         common.log_command(
             ["make", "defconfig"],
             cwd=os.path.join(cwd, os.listdir(cwd)[0]),
@@ -30,13 +27,10 @@ def main():
 
     cwd = os.path.join(cwd, os.listdir(cwd)[0])
     start_time = time.time()
-
     common.log_command(
         ["make", "-j", "4"],
         cwd=cwd,
     )
-
     completion_time_ms = (time.time() - start_time) * 1000
     common.add_to_result_file("linux", [datetime.now(), completion_time_ms])
-
     shutil.rmtree(cwd)

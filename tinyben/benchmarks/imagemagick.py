@@ -2,7 +2,6 @@ import os
 import shutil
 import tarfile
 import time
-
 import tinyben.common as common
 
 
@@ -31,7 +30,6 @@ def main():
         )
 
     cwd = os.path.join(cwd, os.listdir(cwd)[0])
-
     start_time = time.time()
     common.log_command(["make", "-j", "32"], cwd=cwd)
     completion_time_ms = (time.time() - start_time) * 1000

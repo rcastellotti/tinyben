@@ -4,14 +4,12 @@ import shutil
 import tarfile
 import time
 from datetime import datetime
-
 import tinyben.common as common
 
 
 def main():
     cache = os.path.join(os.getcwd(), ".cache")
     os.makedirs(cache, exist_ok=True)
-
     common.add_header_to_file("godot", ["timestamp", "completion_time_ms"])
     cwd = os.path.join(cache, "godot")
 
@@ -37,7 +35,6 @@ def main():
 
     completion_time_ms = (time.time() - start_time) * 1000
     common.add_to_result_file("godot", [datetime.now(), completion_time_ms])
-
     shutil.rmtree(cwd)
 
 

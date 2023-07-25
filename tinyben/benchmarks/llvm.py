@@ -2,7 +2,6 @@ import os
 import shutil
 import tarfile
 import time
-
 import tinyben.common as common
 
 
@@ -11,7 +10,6 @@ def main():
     os.makedirs(cache, exist_ok=True)
     common.add_header_to_file("llvm", ["timestamp", "completion_time_ms"])
     cwd = os.path.join(cache, "llvm")
-
     if not os.path.exists(cwd):
         os.makedirs(cwd)
         common.download_file(
@@ -29,7 +27,6 @@ def main():
         )
 
     cwd = os.path.join(cwd, os.listdir(cwd)[0])
-
     start_time = time.time()
     common.log_command(["ninja"], cwd=os.path.join(cwd, "build"))
     completion_time_ms = (time.time() - start_time) * 1000

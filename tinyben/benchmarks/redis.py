@@ -2,7 +2,6 @@ import os
 import subprocess
 import tarfile
 from datetime import datetime
-
 import tinyben.common as common
 
 
@@ -24,7 +23,6 @@ def main():
         ],
     )
     cwd = os.path.join(cache, "redis")
-
     if not os.path.exists(cwd):
         os.makedirs(cwd)
         common.download_file(
@@ -46,9 +44,7 @@ def main():
         cwd=cwd,
     )
     lines = s.decode().splitlines()[1:]
-
     for line in lines:
         line = [datetime.now()] + [x.strip('"') for x in line.split(",")]
         common.add_to_result_file("redis", line)
-
     subprocess.call(["src/redis-cli", "shutdown"], cwd=cwd)

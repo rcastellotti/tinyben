@@ -3,7 +3,6 @@ import subprocess
 import time
 import zipfile
 from datetime import datetime
-
 import tinyben.common as common
 
 
@@ -15,7 +14,6 @@ def main():
 
     if not os.path.exists(cwd):
         os.makedirs(cwd)
-
         common.download_file(
             "https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip",
             os.path.join(cache, "sqlite.zip"),
@@ -23,7 +21,6 @@ def main():
         )
         with zipfile.ZipFile(os.path.join(cache, "sqlite.zip"), "r") as f:
             f.extractall(cwd)
-
         common.log_command(
             [
                 "gcc",
@@ -65,5 +62,4 @@ def main():
     )
     completion_time_ms = (time.time() - start_time) * 1000
     common.add_to_result_file("sqlite", [datetime.now(), completion_time_ms])
-
     os.remove(os.path.join(cwd, "benchmark.db"))

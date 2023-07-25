@@ -2,7 +2,6 @@ import os
 import subprocess
 import tarfile
 from datetime import datetime
-
 import tinyben.common as common
 
 
@@ -11,7 +10,6 @@ def main():
     os.makedirs(cache, exist_ok=True)
     common.append_to_txt_file("mbw", f"mbw: {datetime.now()}")
     cwd = os.path.join(cache, "mbw")
-
     if not os.path.exists(cwd):
         os.makedirs(cwd)
         common.download_file(
