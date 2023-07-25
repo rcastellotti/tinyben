@@ -4,9 +4,8 @@ mkShell {
     pre-commit
     ruff
     python311Packages.black
-    pkg-config #redis
     python311Packages.requests
     python311Packages.tqdm
-
+    pkg-config #redis
   ];
 }
