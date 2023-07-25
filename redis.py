@@ -3,7 +3,11 @@ import tarfile
 import subprocess
 from datetime import datetime
 import common
+import argparse
 
+parser = argparse.ArgumentParser(prog="tinyben redis benchmark")
+parser.add_argument("--runs", "-r", help="runs", type=int, default=1)
+args = parser.parse_args()
 # https://redis.io/docs/management/optimization/benchmarks/
 # https://redis.io/docs/getting-started/installation/install-redis-from-source/
 # https://github.com/redis/redis/archive/7.0.11.tar.gz
@@ -58,4 +62,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    for i in range(args.runs):
+        main()
