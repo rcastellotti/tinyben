@@ -4,6 +4,8 @@ tinyben is an attempt to create a bencharking suite, similar to [phoronix-test-s
 
 Where possible `tinyben` appends data to a file in `./results` in csv format (useful for `pd.read_csv()`), when it's not possible (i.e. when running an external benchmark that does not support machine readable output, like [`ssvb/tinymembench`](https://github.com/ssvb/tinymembench)) it appends results to a `.txt` file.
 
+Artifacts (cloned tarballs etc.) are stored in `.cache/`.
+
 # Usage 
 
 Using `tinyben` is incredibly simple, just import the benchmark and run it, for example:
