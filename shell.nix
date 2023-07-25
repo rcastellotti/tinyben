@@ -1,9 +1,12 @@
 with import <nixpkgs> { };
 mkShell {
   nativeBuildInputs = [
+    pre-commit
+    ruff
+    python311Packages.black
     pkg-config #redis
-    python310Packages.requests
-    python310Packages.tqdm
+    python311Packages.requests
+    python311Packages.tqdm
 
   ];
 }

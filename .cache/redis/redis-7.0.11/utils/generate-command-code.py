@@ -63,11 +63,13 @@ def get_optional_desc_string(desc, field, force_uppercase=False):
     v = desc.get(field, None)
     if v and force_uppercase:
         v = v.upper()
-    ret = "\"%s\"" % v if v else "NULL"
+    ret = '"%s"' % v if v else "NULL"
     return ret.replace("\n", "\\n")
 
 
-def check_command_args_key_specs(args, command_key_specs_index_set, command_arg_key_specs_index_set):
+def check_command_args_key_specs(
+    args, command_key_specs_index_set, command_arg_key_specs_index_set
+):
     if not args:
         return True
 
@@ -76,15 +78,21 @@ def check_command_args_key_specs(args, command_key_specs_index_set, command_arg_
             assert isinstance(arg.key_spec_index, int)
 
             if arg.key_spec_index not in command_key_specs_index_set:
-                print("command: %s arg: %s key_spec_index error" % (command.fullname(), arg.name))
+                print(
+                    "command: %s arg: %s key_spec_index error"
+                    % (command.fullname(), arg.name)
+                )
                 return False
 
             command_arg_key_specs_index_set.add(arg.key_spec_index)
 
-        if not check_command_args_key_specs(arg.subargs, command_key_specs_index_set, command_arg_key_specs_index_set):
+        if not check_command_args_key_specs(
+            arg.subargs, command_key_specs_index_set, command_arg_key_specs_index_set
+        ):
             return False
 
     return True
+
 
 def check_command_key_specs(command):
     if not command.key_specs:
@@ -105,7 +113,9 @@ def check_command_key_specs(command):
     command_arg_key_specs_index_set = set()
 
     # Collect key_spec used for each arg, including arg.subarg
-    if not check_command_args_key_specs(command.args, command_key_specs_index_set, command_arg_key_specs_index_set):
+    if not check_command_args_key_specs(
+        command.args, command_key_specs_index_set, command_arg_key_specs_index_set
+    ):
         return False
 
     # Check if we have key_specs not used
@@ -117,7 +127,9 @@ def check_command_key_specs(command):
 
 
 # Globals
-subcommands = {}  # container_name -> dict(subcommand_name -> Subcommand) - Only subcommands
+subcommands = (
+    {}
+)  # container_name -> dict(subcommand_name -> Subcommand) - Only subcommands
 commands = {}  # command_name -> Command - Only commands
 
 
@@ -138,7 +150,7 @@ class KeySpec(object):
                     self.spec["begin_search"]["index"]["pos"]
                 )
             elif self.spec["begin_search"].get("keyword"):
-                return "KSPEC_BS_KEYWORD,.bs.keyword={\"%s\",%d}" % (
+                return 'KSPEC_BS_KEYWORD,.bs.keyword={"%s",%d}' % (
                     self.spec["begin_search"]["keyword"]["keyword"],
                     self.spec["begin_search"]["keyword"]["startfrom"],
                 )
@@ -153,13 +165,13 @@ class KeySpec(object):
                 return "KSPEC_FK_RANGE,.fk.range={%d,%d,%d}" % (
                     self.spec["find_keys"]["range"]["lastkey"],
                     self.spec["find_keys"]["range"]["step"],
-                    self.spec["find_keys"]["range"]["limit"]
+                    self.spec["find_keys"]["range"]["limit"],
                 )
             elif self.spec["find_keys"].get("keynum"):
                 return "KSPEC_FK_KEYNUM,.fk.keynum={%d,%d,%d}" % (
                     self.spec["find_keys"]["keynum"]["keynumidx"],
                     self.spec["find_keys"]["keynum"]["firstkey"],
-                    self.spec["find_keys"]["keynum"]["step"]
+                    self.spec["find_keys"]["keynum"]["step"],
                 )
             elif "unknown" in self.spec["find_keys"]:
                 return "KSPEC_FK_UNKNOWN,{{0}}"
@@ -171,7 +183,7 @@ class KeySpec(object):
             get_optional_desc_string(self.spec, "notes"),
             _flags_code(),
             _begin_search_code(),
-            _find_keys_code()
+            _find_keys_code(),
         )
 
 
@@ -215,7 +227,7 @@ class Argument(object):
                 s += "CMD_ARG_MULTIPLE_TOKEN|"
             return s[:-1] if s else "CMD_ARG_NONE"
 
-        s = "\"%s\",%s,%d,%s,%s,%s,%s" % (
+        s = '"%s",%s,%d,%s,%s,%s,%s' % (
             self.name,
             ARG_TYPES[self.type],
             self.desc.get("key_spec_index", -1),
@@ -225,7 +237,7 @@ class Argument(object):
             _flags_code(),
         )
         if "deprecated_since" in self.desc:
-            s += ",.deprecated_since=\"%s\"" % self.desc["deprecated_since"]
+            s += ',.deprecated_since="%s"' % self.desc["deprecated_since"]
         if self.subargs:
             s += ",.subargs=%s" % self.subarg_table_name()
 
@@ -282,7 +294,7 @@ class Command(object):
             return ""
         s = ""
         for tupl in self.desc["history"]:
-            s += "{\"%s\",\"%s\"},\n" % (tupl[0], tupl[1])
+            s += '{"%s","%s"},\n' % (tupl[0], tupl[1])
         s += "{0}"
         return s
 
@@ -291,7 +303,7 @@ class Command(object):
             return ""
         s = ""
         for hint in self.desc["command_tips"]:
-            s += "\"%s\",\n" % hint.lower()
+            s += '"%s",\n' % hint.lower()
         s += "NULL"
         return s
 
@@ -325,7 +337,7 @@ class Command(object):
                 s += "{%s}," % KeySpec(spec).struct_code()
             return s[:-1]
 
-        s = "\"%s\",%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%s,%s," % (
+        s = '"%s",%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%s,%s,' % (
             self.name.lower(),
             get_optional_desc_string(self.desc, "summary"),
             get_optional_desc_string(self.desc, "complexity"),
@@ -339,7 +351,7 @@ class Command(object):
             self.desc.get("function", "NULL"),
             self.desc["arity"],
             _flags_code(),
-            _acl_categories_code()
+            _acl_categories_code(),
         )
 
         specs = _key_specs_code()
@@ -408,7 +420,10 @@ class Subcommand(Command):
         super(Subcommand, self).__init__(name, desc)
 
     def fullname(self):
-        return "%s %s" % (self.container_name, self.name.replace("-", "_").replace(":", ""))
+        return "%s %s" % (
+            self.container_name,
+            self.name.replace("-", "_").replace(":", ""),
+        )
 
 
 def create_command(name, desc):
@@ -427,7 +442,7 @@ srcdir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../src")
 
 # Create all command objects
 print("Processing json files...")
-for filename in glob.glob('%s/commands/*.json' % srcdir):
+for filename in glob.glob("%s/commands/*.json" % srcdir):
     with open(filename, "r") as f:
         try:
             d = json.load(f)
@@ -448,7 +463,9 @@ for command in commands.values():
         subcommand.group = command.group
         command.subcommands.append(subcommand)
 
-check_command_error_counter = 0  # An error counter is used to count errors in command checking.
+check_command_error_counter = (
+    0  # An error counter is used to count errors in command checking.
+)
 
 print("Checking all commands...")
 for command in commands.values():
@@ -461,10 +478,13 @@ if check_command_error_counter != 0:
 
 print("Generating commands.c...")
 with open("%s/commands.c" % srcdir, "w") as f:
-    f.write("/* Automatically generated by %s, do not edit. */\n\n" % os.path.basename(__file__))
-    f.write("#include \"server.h\"\n")
     f.write(
-"""
+        "/* Automatically generated by %s, do not edit. */\n\n"
+        % os.path.basename(__file__)
+    )
+    f.write('#include "server.h"\n')
+    f.write(
+        """
 /* We have fabulous commands from
  * the fantastic
  * Redis Command Table! */\n

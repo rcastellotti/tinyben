@@ -49,10 +49,7 @@ if pre_return_code != 0:
     logging.error("apt-get requires root permission")
     exit
 
-url = (
-    "https://github.com/godotengine/godot/archive/refs/tags/"
-    + filename_tar_gz
-)
+url = "https://github.com/godotengine/godot/archive/refs/tags/" + filename_tar_gz
 
 if not os.path.exists(filename_tar_gz):
     logging.info("starting download: %s", url)

@@ -1,12 +1,8 @@
 import os
 import tarfile
-import time
 import subprocess
-import shutil
-from pathlib import Path
 from datetime import datetime
 import common
-from pprint import pprint
 
 # https://redis.io/docs/management/optimization/benchmarks/
 # https://redis.io/docs/getting-started/installation/install-redis-from-source/
@@ -43,7 +39,7 @@ def main():
     subprocess.run(["make"], cwd=cwd)
 
     subprocess.run(
-        ["src/redis-server","--daemonize","yes"],
+        ["src/redis-server", "--daemonize", "yes"],
         cwd=cwd,
     )
     s = subprocess.check_output(
@@ -52,9 +48,9 @@ def main():
     )
     lines = s.decode().splitlines()[1:]
 
-    for l in lines:
-        l = [datetime.now()]+[x.strip('"') for x in l.split(',')]
-        common.add_to_result_file("redis", l)
+    for line in lines:
+        line = [datetime.now()] + [x.strip('"') for x in line.split(",")]
+        common.add_to_result_file("redis", line)
 
     subprocess.call(["src/redis-cli", "shutdown"], cwd=cwd)
 

@@ -10,17 +10,13 @@ from pathlib import Path
 # option to choose how many cores?
 
 
-
 tardir = "tinymembench"
 filename = "v0.4"
 filename_tar_gz = filename + ".tar.gz"
 pre_return_code = 1
 cwd = ""
 
-url = (
-    "https://github.com/ssvb/tinymembench/archive/refs/tags/"
-    + filename_tar_gz
-)
+url = "https://github.com/ssvb/tinymembench/archive/refs/tags/" + filename_tar_gz
 
 if not os.path.exists(filename_tar_gz):
     logging.info("starting download: %s", url)
@@ -36,9 +32,9 @@ pre_return_code = subprocess.call(["make"], cwd=cwd)
 logging.debug("pre phase return code: %s", pre_return_code)
 if pre_return_code == 0:
     Path("results").mkdir(parents=True, exist_ok=True)
-    filename = f"results/tinymembench.txt"
+    filename = "results/tinymembench.txt"
     with open(filename, "a+", encoding="utf-8") as f:
-        f.write(datetime.now().strftime('%Y-%m-%d-%H:%M:%S'))
+        f.write(datetime.now().strftime("%Y-%m-%d-%H:%M:%S"))
         ret = subprocess.call(["./tinymembench"], cwd=cwd, stdout=f)
 
 

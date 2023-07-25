@@ -15,7 +15,6 @@ import common
 # https://llvm.org/docs/GettingStarted.html#getting-the-source-code-and-building-llvm
 
 
-
 filename = "llvmorg-16.0.4"
 filename_tar_gz = filename + ".tar.gz"
 pre_return_code = 1
@@ -30,10 +29,7 @@ if pre_return_code != 0:
     logging.error("apt-get requires root permission")
     exit
 
-url = (
-    "https://github.com/llvm/llvm-project/archive/refs/tags/"
-    + filename_tar_gz
-)
+url = "https://github.com/llvm/llvm-project/archive/refs/tags/" + filename_tar_gz
 
 if not os.path.exists(filename_tar_gz):
     logging.info("starting download: %s", url)
@@ -52,7 +48,7 @@ pre_return_code = subprocess.call(
 if pre_return_code == 0:
     start_time = time.time()
     ret = subprocess.call(["ninja"], cwd=cwd + "/build")
-    running_time = (time.time() - start_time)*1000
+    running_time = (time.time() - start_time) * 1000
     if ret == 0:
         common.save_to_file("llvm", [start_time, running_time])
 

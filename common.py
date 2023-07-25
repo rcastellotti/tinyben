@@ -2,7 +2,8 @@ import csv
 import os
 from tqdm import tqdm
 import tempfile
-import requests, os, pathlib
+import requests
+import pathlib
 
 
 def add_header_to_file(filename, row_to_append):
@@ -19,7 +20,7 @@ def add_to_result_file(filename, row_to_append):
     file = f"./results/{filename}.csv"
     # file_exists = os.path.exists(file)
     with open(file, "a+") as f:
-        csv_writer = csv.writer(f,quotechar='"')
+        csv_writer = csv.writer(f, quotechar='"')
         # if not file_exists:
         csv_writer.writerow(row_to_append)
 

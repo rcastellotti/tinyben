@@ -1,4 +1,3 @@
-import logging
 import os
 import zipfile
 import time
@@ -17,7 +16,7 @@ def main():
     os.makedirs(".cache", exist_ok=True)
     common.download_file(
         url,
-        f".cache/sqlite.zip",
+        ".cache/sqlite.zip",
         skip_if_exists=True,
     )
     with zipfile.ZipFile("./.cache/sqlite.zip", "r") as f:
@@ -62,12 +61,11 @@ def main():
     common.add_to_result_file("sqlite", [datetime.now(), running_time])
     # shutil.rmtree("sqlite")
 
+
 if __name__ == "__main__":
     main()
 
 
-# we should do some things different, like having a "clean" flag that allows to 
+# we should do some things different, like having a "clean" flag that allows to
 # specify to redo everything  and we should define some rule (things to check that
 # reveal whether we should download or at lest build)
-
-
