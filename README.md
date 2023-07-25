@@ -6,6 +6,7 @@ Where possible `tinyben` appends data to a file in `./results` in csv format (us
 
 Artifacts (cloned tarballs etc.) are stored in `.cache/`.
 
+`tinyben` uses the [nix](https://nixos.org/) package manager, to run benchmarks enter the nix-shell using `nix-shell`
 # Usage 
 
 Using `tinyben` is incredibly simple, just import the benchmark and run it, for example:
