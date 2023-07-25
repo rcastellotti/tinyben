@@ -9,7 +9,7 @@ import os
 import subprocess
 import shutil
 import time
-import common
+import tinyben.common as common
 
 # option to choose how many cores?
 

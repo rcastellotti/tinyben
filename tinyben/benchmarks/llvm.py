@@ -2,7 +2,7 @@ import tarfile
 import os
 import time
 import shutil
-import common
+from tinyben import common
 import argparse
 
 
@@ -34,7 +34,7 @@ def main():
     cwd = os.path.join(".cache/llvm", os.listdir(".cache/llvm")[0])
 
     start_time = time.time()
-    common.log_command(["ninja"], cwd=os.path.join(cwd, "/build"))
+    common.log_command(["ninja"], cwd=os.path.join(cwd, "build"))
     completion_time_ms = (time.time() - start_time) * 1000
     common.add_to_result_file("llvm", [start_time, completion_time_ms])
     shutil.rmtree(cwd)
