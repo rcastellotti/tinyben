@@ -8,6 +8,7 @@ import argparse
 parser = argparse.ArgumentParser(prog="tinyben redis benchmark")
 parser.add_argument("--runs", "-r", help="runs", type=int, default=1)
 args = parser.parse_args()
+
 # https://redis.io/docs/management/optimization/benchmarks/
 # https://redis.io/docs/getting-started/installation/install-redis-from-source/
 # https://github.com/redis/redis/archive/7.0.11.tar.gz
@@ -32,8 +33,7 @@ def main():
     url = "https://github.com/redis/redis/archive/7.0.11.tar.gz"
 
     os.makedirs(".cache", exist_ok=True)
-    cwd = os.path.join(".cache/redis/", os.listdir(".cache/redis")[0])
-    if not os.path.exists(cwd):
+    if not os.path.exists(".cache/redis/"):
         common.download_file(
             url,
             ".cache/redis.tar.gz",
@@ -41,9 +41,10 @@ def main():
         )
         with tarfile.open(".cache/redis.tar.gz") as tar:
             tar.extractall(".cache/redis")
-
+        cwd = os.path.join(".cache/redis/", os.listdir(".cache/redis")[0])
         subprocess.run(["make"], cwd=cwd)
 
+    cwd = os.path.join(".cache/redis/", os.listdir(".cache/redis")[0])
     subprocess.run(
         ["src/redis-server", "--daemonize", "yes"],
         cwd=cwd,
