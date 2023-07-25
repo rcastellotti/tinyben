@@ -1,35 +1,28 @@
-import urllib.request
 import logging
 import os
 import zipfile
 import time
 import subprocess
-import shutil
+from datetime import datetime
 import common
 
-# make sure this benchmark has everything it needs like unzip?
 # https://www.sqlite.org/howtocompile.html
 # https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip
 
 
-
-
 def main():
-    print("hi")
-    filename = "sqlite-amalgamation-3420000"
-    filename_zip = filename + ".zip"
-    pre_return_code = 1
-    cwd = ""
-    url = "https://www.sqlite.org/2023/" + filename_zip
+    common.add_header_to_file("sqlite", ["timestamp", "completion_time_ms"])
 
-    if not os.path.exists(filename_zip):
-        logging.info("starting download: %s", url)
-        urllib.request.urlretrieve(url, filename_zip)
-        logging.info("completed download: %s", url)
+    url = "https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip"
+    os.makedirs(".cache", exist_ok=True)
+    common.download_file(
+        url,
+        f".cache/sqlite.zip",
+        skip_if_exists=True,
+    )
+    with zipfile.ZipFile("./.cache/sqlite.zip", "r") as f:
+        f.extractall(".cache/sqlite")
 
-    with zipfile.ZipFile(filename_zip, "r") as f:
-        f.extractall(filename)
-    cwd = filename + "/" + os.listdir(filename)[0]
     command = [
         "gcc",
         "shell.c",
@@ -40,9 +33,9 @@ def main():
         "-o",
         "sqlite3",
     ]
-    pre_return_code = subprocess.call(command, cwd=cwd)
-    print(pre_return_code)
-    os.chmod(cwd + "/sqlite3", 0o755)
+    cwd = f".cache/sqlite/{os.listdir('.cache/sqlite')[0]}"
+    subprocess.run(command, cwd=cwd)
+    os.chmod(f"{cwd}/sqlite3", 0o755)
 
     command = [
         "./sqlite3",
@@ -54,27 +47,27 @@ def main():
             'F2' VARCHAR(16) NOT NULL
             );""",
     ]
-    os.chmod(cwd + "/sqlite3", 0o755)
-    pre_return_code = subprocess.call(command, cwd=cwd)
+    subprocess.run(command, cwd=cwd)
 
-    logging.debug("pre phase return code: %s", pre_return_code)
-    if pre_return_code == 0:
-        start_time = time.time()
-        ret = subprocess.call(
-            [
-                "./sqlite3",
-                "benchmark.db",
-                ".read ../../assets/sqlite-2500-insertions.sql",
-            ],
-            cwd=cwd,
-        )
-
-        running_time = (time.time() - start_time) * 1000
-        if ret == 0:
-            common.save_to_file("sqlite", [start_time, running_time])
-        shutil.rmtree(filename)
-        os.remove(filename_zip)
-
+    start_time = time.time()
+    subprocess.call(
+        [
+            "./sqlite3",
+            "benchmark.db",
+            ".read ../../../assets/sqlite-2500-insertions.sql",
+        ],
+        cwd=cwd,
+    )
+    running_time = (time.time() - start_time) * 1000
+    common.add_to_result_file("sqlite", [datetime.now(), running_time])
+    # shutil.rmtree("sqlite")
 
 if __name__ == "__main__":
     main()
+
+
+# we should do some things different, like having a "clean" flag that allows to 
+# specify to redo everything  and we should define some rule (things to check that
+# reveal whether we should download or at lest build)
+
+
