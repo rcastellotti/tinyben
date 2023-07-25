@@ -5,9 +5,6 @@ from datetime import datetime
 import common
 import argparse
 
-parser = argparse.ArgumentParser(prog="tinyben redis benchmark")
-parser.add_argument("--runs", "-r", help="runs", type=int, default=1)
-args = parser.parse_args()
 
 # https://redis.io/docs/management/optimization/benchmarks/
 # https://redis.io/docs/getting-started/installation/install-redis-from-source/
@@ -29,13 +26,10 @@ def main():
             "max_latency_ms",
         ],
     )
-
-    url = "https://github.com/redis/redis/archive/7.0.11.tar.gz"
-
     os.makedirs(".cache", exist_ok=True)
     if not os.path.exists(".cache/redis/"):
         common.download_file(
-            url,
+            "https://github.com/redis/redis/archive/7.0.11.tar.gz",
             ".cache/redis.tar.gz",
             skip_if_exists=True,
         )
@@ -63,5 +57,9 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(prog="tinyben redis benchmark")
+    parser.add_argument("--runs", "-r", help="runs", type=int, default=1)
+    args = parser.parse_args()
+
     for i in range(args.runs):
         main()
