@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 def main():
-    timestamp=datetime.now()
+    timestamp = datetime.now()
     common.add_header_to_file("lz4", ["timestamp", "type", "completion_time_ms"])
     os.makedirs(".cache", exist_ok=True)
 
@@ -31,7 +31,7 @@ def main():
     )
     completion_time_ms = (time.time() - start_time) * 1000
     common.add_to_result_file("lz4", [timestamp, "decompression", completion_time_ms])
-    
+
     shutil.rmtree(".cache/lz4")
 
 
