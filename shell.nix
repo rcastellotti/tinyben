@@ -16,5 +16,7 @@ mkShell {
     elfutils #linux
     fakeroot #linux
     openssl #linux
+    scons #godot
+    lz4 #lz4 :)
   ];
 }   

@@ -3,7 +3,7 @@ import tarfile
 import time
 import shutil
 from datetime import datetime
-import common
+import tinyben.common as common
 import argparse
 
 # https://www.sqlite.org/howtocompile.html

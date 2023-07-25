@@ -2,7 +2,7 @@ import os
 import tarfile
 import subprocess
 from datetime import datetime
-import common
+import tinyben.common as common
 import argparse
 
 

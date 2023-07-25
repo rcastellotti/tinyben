@@ -5,7 +5,7 @@ import tempfile
 import requests
 import pathlib
 import subprocess
-from log import logger
+from tinyben.log import logger
 
 
 def add_header_to_file(filename, row_to_append):
@@ -25,6 +25,16 @@ def add_to_result_file(filename, row_to_append):
         csv_writer = csv.writer(f, quotechar='"')
         # if not file_exists:
         csv_writer.writerow(row_to_append)
+
+
+def append_to_txt_file(filename, data):
+    os.makedirs("./results", exist_ok=True)
+
+    file = f"./results/{filename}.txt"
+    # file_exists = os.path.exists(file)
+    with open(file, "a+") as f:
+        # if not file_exists:
+        f.write(data)
 
 
 def download_file(url, fp, skip_if_exists=True):
