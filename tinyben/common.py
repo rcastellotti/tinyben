@@ -1,10 +1,12 @@
 import csv
 import os
-from tqdm import tqdm
-import tempfile
-import requests
 import pathlib
 import subprocess
+import tempfile
+
+import requests
+from tqdm import tqdm
+
 from tinyben.log import logger
 
 

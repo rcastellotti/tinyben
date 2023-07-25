@@ -1,36 +1,34 @@
 import os
+import shutil
 import tarfile
 import time
-import shutil
 from datetime import datetime
-import tinyben.common as common
-import argparse
 
-# https://www.sqlite.org/howtocompile.html
-# https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.5.tar.xz
+import tinyben.common as common
 
 
 def main():
+    cache = os.path.join(os.getcwd(), ".cache")
+    os.makedirs(cache, exist_ok=True)
     common.add_header_to_file("linux", ["timestamp", "completion_time_ms"])
-    os.makedirs(".cache", exist_ok=True)
+    cwd = os.path.join(cache, "linux")
 
-    if not os.path.exists(".cache/linux"):
+    if not os.path.exists(cwd):
         common.download_file(
             "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.5.tar.xz",
-            ".cache/linux.tar.xz",
+            os.path.join(cache, "linux.tar.xz"),
             skip_if_exists=True,
         )
-        with tarfile.open(".cache/linux.tar.xz") as tar:
-            tar.extractall(".cache/linux")
+        with tarfile.open(os.path.join(cache, "linux.tar.xz")) as tar:
+            tar.extractall(cwd)
 
-        cwd = os.path.join(".cache/linux", os.listdir(".cache/linux")[0])
-
+        print(os.path.join(cwd, os.listdir(cwd)[0]))
         common.log_command(
             ["make", "defconfig"],
-            cwd=cwd,
+            cwd=os.path.join(cwd, os.listdir(cwd)[0]),
         )
 
-    cwd = os.path.join(".cache/linux", os.listdir(".cache/linux")[0])
+    cwd = os.path.join(cwd, os.listdir(cwd)[0])
     start_time = time.time()
 
     common.log_command(
@@ -42,11 +40,3 @@ def main():
     common.add_to_result_file("linux", [datetime.now(), completion_time_ms])
 
     shutil.rmtree(cwd)
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="tinyben sqlite benchmark")
-    parser.add_argument("--runs", "-r", help="runs", type=int, default=1)
-    args = parser.parse_args()
-    for i in range(args.runs):
-        main()

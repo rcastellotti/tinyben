@@ -1,28 +1,33 @@
+import argparse
 import os
+import shutil
 import tarfile
 import time
-import shutil
 from datetime import datetime
+
 import tinyben.common as common
-import argparse
 
 
 def main():
-    common.add_header_to_file("godot", ["timestamp", "completion_time_ms"])
-    os.makedirs(".cache", exist_ok=True)
+    cache = os.path.join(os.getcwd(), ".cache")
+    os.makedirs(cache, exist_ok=True)
 
-    if not os.path.exists(".cache/godot"):
+    common.add_header_to_file("godot", ["timestamp", "completion_time_ms"])
+    cwd = os.path.join(cache, "godot")
+
+    if not os.path.exists(cwd):
+        os.makedirs(cwd)
         common.download_file(
             "https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz",
-            ".cache/godot.tar.gz",
+            os.path.join(cache, "godot.tar.gz"),
             skip_if_exists=True,
         )
-        with tarfile.open(".cache/godot.tar.gz") as tar:
-            tar.extractall(".cache/godot")
+        with tarfile.open(
+            os.path.join(cache, "godot.tar.gz"),
+        ) as tar:
+            tar.extractall(cwd)
 
-        cwd = os.path.join(".cache/godot", os.listdir(".cache/godot")[0])
-
-    cwd = os.path.join(".cache/godot", os.listdir(".cache/godot")[0])
+    cwd = os.path.join(cwd, os.listdir(cwd)[0])
     start_time = time.time()
 
     common.log_command(

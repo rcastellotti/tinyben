@@ -1,10 +1,10 @@
 import os
+import shutil
 import subprocess
 import time
-import shutil
-import argparse
-import tinyben.common as common
 from datetime import datetime
+
+import tinyben.common as common
 
 
 def main():
@@ -35,11 +35,3 @@ def main():
     common.add_to_result_file("lz4", [timestamp, "decompression", completion_time_ms])
 
     shutil.rmtree(cwd)
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="tinyben lz4 benchmark")
-    parser.add_argument("--runs", "-r", help="runs", type=int, default=1)
-    args = parser.parse_args()
-    for i in range(args.runs):
-        main()

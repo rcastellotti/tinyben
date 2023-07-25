@@ -1,5 +1,7 @@
 [tool.ruff]
 exclude = [".cache"]
+select = ["F", "E", "W", "I001"]
+
 
 [tool.black]
 include = '\.pyi?$'

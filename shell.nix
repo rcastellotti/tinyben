@@ -1,26 +1,3 @@
-# let
-#   pkgs = import <nixpkgs> {};
-# in
-# pkgs.mkShell {
-#   nativeBuildInputs = with pkgs; [
-#     pkgs.pre-commit
-#     ruff
-#     git
-#     pkg-config #redis
-#     cmake #llvm
-#     ninja #llvm
-#     flex #linux
-#     bison #linux
-#     bc #linux
-#     elfutils #linux
-#     fakeroot #linux
-#     openssl #linux
-#     scons #godot
-#     lz4 #lz4 :)
-#     python3.withPackages (pyPkgs: with pyPkgs; [ black requests tqdm])
-
-#   ];
-# }   
 let
   pkgs = import <nixpkgs> {};
 in
@@ -31,7 +8,6 @@ pkgs.mkShell {
       ps.requests
       ps.tqdm
     ]))
-
   pkgs.pre-commit
   pkgs.ruff
   pkgs.git
