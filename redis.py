@@ -26,17 +26,19 @@ def main():
     )
 
     url = "https://github.com/redis/redis/archive/7.0.11.tar.gz"
-    os.makedirs(".cache", exist_ok=True)
-    common.download_file(
-        url,
-        ".cache/redis.tar.gz",
-        skip_if_exists=True,
-    )
-    with tarfile.open(".cache/redis.tar.gz") as tar:
-        tar.extractall(".cache/redis")
 
+    os.makedirs(".cache", exist_ok=True)
     cwd = os.path.join(".cache/redis/", os.listdir(".cache/redis")[0])
-    subprocess.run(["make"], cwd=cwd)
+    if not os.path.exists(cwd):
+        common.download_file(
+            url,
+            ".cache/redis.tar.gz",
+            skip_if_exists=True,
+        )
+        with tarfile.open(".cache/redis.tar.gz") as tar:
+            tar.extractall(".cache/redis")
+
+        subprocess.run(["make"], cwd=cwd)
 
     subprocess.run(
         ["src/redis-server", "--daemonize", "yes"],
