@@ -10,5 +10,11 @@ mkShell {
     pkg-config #redis
     cmake #llvm
     ninja #llvm
+    flex #linux
+    bison #linux
+    bc #linux
+    elfutils #linux
+    fakeroot #linux
+    openssl #linux
   ];
-}
+}   
