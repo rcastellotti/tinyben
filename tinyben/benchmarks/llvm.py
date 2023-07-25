@@ -2,7 +2,7 @@ import tarfile
 import os
 import time
 import shutil
-from tinyben import common
+import common
 import argparse
 
 

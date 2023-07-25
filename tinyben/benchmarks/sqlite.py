@@ -61,7 +61,7 @@ def main():
         [
             "./sqlite3",
             "benchmark.db",
-            ".read ../../../assets/sqlite-2500-insertions.sql",
+            ".read ../../../../assets/sqlite-2500-insertions.sql",
         ],
         cwd=cwd,
     )
