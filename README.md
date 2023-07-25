@@ -2,36 +2,14 @@
 
 tinyben is an attempt to create a bencharking suite, similar to [phoronix-test-suite](https://www.phoronix-test-suite.com/), but simpler and easier to use. tinyBen is designed to ben <1000 lines of code [1](https://github.com/geohot/minikeyvalue).
 
+Where possible `tinyben` appends data to a file in `./results` in csv format (useful for `pd.read_csv()`), when it's not possible (i.e. when running an external benchmark that does not support machine readable output, like [`ssvb/tinymembench`](https://github.com/ssvb/tinymembench)) it appends results to a `.txt` file.
 
+# Usage 
 
-## `sqlite.py`
-```bash
-timestamp,completion_time_ms
-2023-07-25 12:04:14.586050,4698.448657989502
+Using `tinyben` is incredibly simple, just import the benchmark and run it, for example:
+
+```python3
+#run.py
+import tinyben.benchmarks.llvm as llvm
+llvm.main()
 ```
-## `redis.py`
-```csv
-timestamp,test,rps,avg_latency_ms,min_latency_ms,p50_latency_ms,p95_latency_ms,p99_latency_ms,max_latency_ms
-2023-07-25 12:09:15.743537,PING_INLINE,115473.45,0.225,0.064,0.239,0.295,0.319,0.623
-2023-07-25 12:09:15.744728,PING_MBULK,105374.08,0.246,0.064,0.247,0.303,0.319,0.463
-2023-07-25 12:09:15.745496,SET,102354.15,0.254,0.064,0.247,0.311,0.351,1.119
-2023-07-25 12:09:15.745946,GET,97465.88,0.265,0.064,0.263,0.319,0.343,0.495
-2023-07-25 12:09:15.746327,INCR,98425.20,0.263,0.072,0.263,0.319,0.335,0.487
-2023-07-25 12:09:15.746690,LPUSH,99009.90,0.262,0.064,0.263,0.319,0.335,0.503
-2023-07-25 12:09:15.747061,RPUSH,101317.12,0.257,0.064,0.255,0.303,0.327,0.599
-2023-07-25 12:09:15.747352,LPOP,100000.00,0.260,0.072,0.255,0.319,0.327,0.591
-2023-07-25 12:09:15.747648,RPOP,97847.36,0.266,0.072,0.263,0.319,0.343,0.511
-2023-07-25 12:09:15.747928,SADD,102354.15,0.255,0.072,0.255,0.303,0.327,0.591
-2023-07-25 12:09:15.748232,HSET,101522.84,0.257,0.064,0.255,0.303,0.327,0.487
-2023-07-25 12:09:15.748526,SPOP,94966.77,0.272,0.064,0.271,0.319,0.343,0.471
-2023-07-25 12:09:15.748823,ZADD,97560.98,0.266,0.072,0.263,0.319,0.335,0.503
-2023-07-25 12:09:15.749108,ZPOPMIN,98425.20,0.263,0.072,0.263,0.319,0.335,0.575
-2023-07-25 12:09:15.749415,LPUSH (needed to benchmark LRANGE),97087.38,0.267,0.072,0.263,0.319,0.359,1.167
-2023-07-25 12:09:15.749718,LRANGE_100 (first 100 elements),71530.76,0.405,0.192,0.383,0.567,0.727,1.023
-2023-07-25 12:09:15.750030,LRANGE_300 (first 300 elements),31181.79,0.809,0.320,0.807,0.855,0.959,2.007
-2023-07-25 12:09:15.750302,LRANGE_500 (first 500 elements),22217.29,1.126,0.312,1.127,1.183,1.319,3.351
-2023-07-25 12:09:15.750619,LRANGE_600 (first 600 elements),19040.37,1.302,0.304,1.303,1.375,1.535,3.903
-2023-07-25 12:09:15.750968,MSET (10 keys),104493.20,0.299,0.152,0.271,0.463,0.559,0.815
-```
-
-logging.DEBUG -> shows commands used to build
