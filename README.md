@@ -33,3 +33,5 @@ timestamp,test,rps,avg_latency_ms,min_latency_ms,p50_latency_ms,p95_latency_ms,p
 2023-07-25 12:09:15.750619,LRANGE_600 (first 600 elements),19040.37,1.302,0.304,1.303,1.375,1.535,3.903
 2023-07-25 12:09:15.750968,MSET (10 keys),104493.20,0.299,0.152,0.271,0.463,0.559,0.815
 ```
+
+logging.DEBUG -> shows commands used to build

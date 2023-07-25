@@ -4,6 +4,8 @@ from tqdm import tqdm
 import tempfile
 import requests
 import pathlib
+import subprocess
+from log import logger
 
 
 def add_header_to_file(filename, row_to_append):
@@ -41,3 +43,22 @@ def download_file(url, fp, skip_if_exists=True):
             progress_bar.update(f.write(chunk))
         f.close()
         os.rename(f.name, fp)
+
+
+def log_command(popenargs, **kwargs):
+    # adapted from https://gist.github.com/krzemienski/8c7e8e76c8652984cca0da3fea5b5368
+    process = subprocess.Popen(
+        popenargs, **kwargs, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
+
+    def check_io():
+        while True:
+            output = process.stdout.readline().decode().strip("\n")
+            if output:
+                logger.debug(output)
+            else:
+                break
+
+    # keep checking stdout/stderr until the child exits
+    while process.poll() is None:
+        check_io()

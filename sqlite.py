@@ -17,46 +17,49 @@ args = parser.parse_args()
 def main():
     common.add_header_to_file("sqlite", ["timestamp", "completion_time_ms"])
 
-    url = "https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip"
-
     os.makedirs(".cache", exist_ok=True)
 
     if not os.path.exists(".cache/sqlite"):
         common.download_file(
-            url,
+            "https://www.sqlite.org/2023/sqlite-amalgamation-3420000.zip",
             ".cache/sqlite.zip",
             skip_if_exists=True,
         )
         with zipfile.ZipFile("./.cache/sqlite.zip", "r") as f:
             f.extractall(".cache/sqlite")
 
-        command = [
-            "gcc",
-            "shell.c",
-            "sqlite3.c",
-            "-lpthread",
-            "-ldl",
-            "-lm",
-            "-o",
-            "sqlite3",
-        ]
         cwd = os.path.join(".cache/sqlite", os.listdir(".cache/sqlite")[0])
 
-        subprocess.run(command, cwd=cwd)
+        common.log_command(
+            [
+                "gcc",
+                "-v",
+                "shell.c",
+                "sqlite3.c",
+                "-lpthread",
+                "-ldl",
+                "-lm",
+                "-o",
+                "sqlite3",
+            ],
+            cwd=cwd,
+        )
         os.chmod(f"{cwd}/sqlite3", 0o755)
 
     cwd = os.path.join(".cache/sqlite", os.listdir(".cache/sqlite")[0])
-    command = [
-        "./sqlite3",
-        "benchmark.db",
-        """CREATE TABLE pts1 (
+    common.log_command(
+        [
+            "./sqlite3",
+            "benchmark.db",
+            """CREATE TABLE pts1 (
             'I' SMALLINT NOT NULL,
             'DT' TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             'F1' VARCHAR(4) NOT NULL,
             'F2' VARCHAR(16) NOT NULL
             );""",
-    ]
-    subprocess.run(command, cwd=cwd)
+        ],
+        cwd=cwd,
+    )
 
     start_time = time.time()
     subprocess.call(

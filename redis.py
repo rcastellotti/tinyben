@@ -42,7 +42,7 @@ def main():
         with tarfile.open(".cache/redis.tar.gz") as tar:
             tar.extractall(".cache/redis")
         cwd = os.path.join(".cache/redis/", os.listdir(".cache/redis")[0])
-        subprocess.run(["make"], cwd=cwd)
+        common.log_command(["make"], cwd=cwd)
 
     cwd = os.path.join(".cache/redis/", os.listdir(".cache/redis")[0])
     subprocess.run(
