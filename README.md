@@ -10,7 +10,7 @@ timestamp,completion_time_ms
 2023-07-25 12:04:14.586050,4698.448657989502
 ```
 ## `redis.py`
-```bash
+```csv
 timestamp,test,rps,avg_latency_ms,min_latency_ms,p50_latency_ms,p95_latency_ms,p99_latency_ms,max_latency_ms
 2023-07-25 12:09:15.743537,PING_INLINE,115473.45,0.225,0.064,0.239,0.295,0.319,0.623
 2023-07-25 12:09:15.744728,PING_MBULK,105374.08,0.246,0.064,0.247,0.303,0.319,0.463
