@@ -14,5 +14,8 @@ Using `tinyben` is incredibly simple, just import the benchmark and run it, for 
 ```python3
 #run.py
 import tinyben.benchmarks.llvm as llvm
+import logging
+from tinyben.log import logger
+logger.setLevel(logging.INFO)
 llvm.main()
 ```
