@@ -18,13 +18,13 @@ def main():
             skip_if_exists=True,
         )
 
-        with tarfile.open(os.path.join(cache, "llvm.tar.gz")) as tar:
-            tar.extractall(cwd)
+    with tarfile.open(os.path.join(cache, "llvm.tar.gz")) as tar:
+        tar.extractall(cwd)
 
-        common.log_command(
-            ["cmake", "-S llvm", "-DCMAKE_BUILD_TYPE=Release", "-B build", "-G Ninja"],
-            cwd=os.path.join(cwd, os.listdir(cwd)[0]),
-        )
+    common.log_command(
+        ["cmake", "-S llvm", "-DCMAKE_BUILD_TYPE=Release", "-B build", "-G Ninja"],
+        cwd=os.path.join(cwd, os.listdir(cwd)[0]),
+    )
 
     cwd = os.path.join(cwd, os.listdir(cwd)[0])
     start_time = time.time()
