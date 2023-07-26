@@ -22,5 +22,6 @@ pkgs.mkShell {
   pkgs.openssl # linux
   pkgs.scons # godot
   pkgs.lz4 # lz4 :)
+  pkgs.redis # redis :)
 ];
 }

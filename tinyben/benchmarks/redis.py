@@ -22,29 +22,16 @@ def main():
             "max_latency_ms",
         ],
     )
-    cwd = os.path.join(cache, "redis")
-    if not os.path.exists(cwd):
-        os.makedirs(cwd)
-        common.download_file(
-            "https://github.com/redis/redis/archive/7.0.11.tar.gz",
-            os.path.join(cache, "redis.tar.gz"),
-            skip_if_exists=True,
-        )
-        with tarfile.open(os.path.join(cache, "redis.tar.gz")) as tar:
-            tar.extractall(cwd)
-        common.log_command(["make"], cwd=os.path.join(cwd, os.listdir(cwd)[0]))
-
-    cwd = os.path.join(cwd, os.listdir(cwd)[0])
     subprocess.run(
-        ["src/redis-server", "--daemonize", "yes"],
-        cwd=cwd,
+        ["redis-server", "--daemonize", "yes"],
+    
     )
     s = subprocess.check_output(
-        ["src/redis-benchmark", "--csv"],
-        cwd=cwd,
+        ["redis-benchmark", "--csv"],
+    
     )
     lines = s.decode().splitlines()[1:]
     for line in lines:
         line = [datetime.now()] + [x.strip('"') for x in line.split(",")]
         common.add_to_result_file("redis", line)
-    subprocess.call(["src/redis-cli", "shutdown"], cwd=cwd)
+    subprocess.call(["redis-cli", "shutdown"])
