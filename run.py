@@ -7,13 +7,17 @@ import tinyben.benchmarks.mbw as mbw
 import tinyben.benchmarks.redis as redis
 import tinyben.benchmarks.sqlite as sqlite
 import tinyben.benchmarks.tinymembench as tmb
-
-sqlite.main()
-redis.main()
-llvm.main()
-linux.main()
-tmb.main()
-mbw.main()
-godot.main()
-im.main()
-lz4.main()
+import logging
+from tinyben.log import logger
+logger.setLevel(logging.INFO)
+for i in range(5):
+    llvm.main()
+    sqlite.main()
+    redis.main()
+    llvm.main()
+    linux.main()
+    tmb.main()
+    mbw.main()
+    godot.main()
+    im.main()
+    lz4.main()
