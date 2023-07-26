@@ -13,17 +13,16 @@ def main():
     common.add_header_to_file("godot", ["timestamp", "completion_time_ms"])
     cwd = os.path.join(cache, "godot")
 
-    if not os.path.exists(cwd):
-        os.makedirs(cwd)
-        common.download_file(
-            "https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz",
-            os.path.join(cache, "godot.tar.gz"),
-            skip_if_exists=True,
-        )
-        with tarfile.open(
-            os.path.join(cache, "godot.tar.gz"),
-        ) as tar:
-            tar.extractall(cwd)
+    os.makedirs(cwd,exist_ok=True)
+    common.download_file(
+        "https://github.com/godotengine/godot/archive/refs/tags/4.0.3-stable.tar.gz",
+        os.path.join(cache, "godot.tar.gz"),
+        skip_if_exists=True,
+    )
+    with tarfile.open(
+        os.path.join(cache, "godot.tar.gz"),
+    ) as tar:
+        tar.extractall(cwd)
 
     cwd = os.path.join(cwd, os.listdir(cwd)[0])
     start_time = time.time()

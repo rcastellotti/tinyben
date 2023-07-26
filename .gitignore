@@ -4,3 +4,4 @@ venv/
 results/
 .cache/
 .ruff_cache/
+*.rdb

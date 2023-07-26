@@ -11,7 +11,7 @@ def main():
     common.add_header_to_file("llvm", ["timestamp", "completion_time_ms"])
     cwd = os.path.join(cache, "llvm")
     if not os.path.exists(cwd):
-        os.makedirs(cwd)
+        os.makedirs(cwd,exist_ok=True)
         common.download_file(
             "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-16.0.4.tar.gz",
             os.path.join(cache, "llvm.tar.gz"),
